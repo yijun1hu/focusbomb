@@ -33,6 +33,21 @@ function createNewEvent(name, type, repeat, repeatedDays, datesRepeated, excepti
 }
 
 /**
+ * Read an existing event from local storage
+ * @return javascript object referring to 
+ */
+function readExistingEvent(name) {
+    var currstorage = JSON.parse(loadLocalStorage("events"));
+    var i = 0;
+    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific event
+        if (currstorage.events[i].name === name) {
+            return currstorage.events[i];
+        }
+    }
+    alert("Failed to read event - the provided name does not match any existing events.");
+}
+
+/**
  * Create a new list and save it to local storage
  */
 function createNewList(name, type, color, sites) {

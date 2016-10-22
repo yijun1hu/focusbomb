@@ -1,5 +1,4 @@
-{
-  "clock_system":
+
   {
     "alarms":[
       {
@@ -23,31 +22,8 @@
        "name":"FRIENDLY"
       }
       
-      ],
-      "Weblist":{
-        "list":[
-        {
-          "type":"w",
-          "color":"#FFFF00",
-          "name": "FIREFLY",
-          "sites":[
-            "twitter.com",
-            "facebook.com",
-            "pong.com"
-          ]
-        },
-        {
-          "type":"b",
-          "color":"#800000",
-          "name": "FRIENDLY",
-          "sites":[
-            "twitter.com",
-            "facebook.com",
-            "pong.com"
-          ]
-        }
       ]
-    }
   }
-}
+
+
 

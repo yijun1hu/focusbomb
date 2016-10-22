@@ -96,9 +96,13 @@ function getAllEvents() {
             }
             toSort[t + 1] = temp;
         }
-        return toSort;
     }
 
+    var toreturn = [];
+    for (i = 0; i < toSort.length(); i += 1) {
+        toreturn.push(toSort[i].name);
+    }
+    return toreturn;
 }
 
 /**

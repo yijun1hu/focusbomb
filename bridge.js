@@ -37,3 +37,17 @@ function getNextEvents() {
    
 }
 
+/**
+ * Obtain data from the front-end and convert that into a new event
+ */
+function MEvent() {
+    var inputDate = document.getElementById("inputDate").innerHTML;
+    inputDate.replace("-", " "); //convert the output into the required format
+    var startTime = parseInt(document.getElementById("startTime").innerHTML); //assumes 00:00:00 format
+    startTime.replace(":", "");
+    startTime = startTime.substring(0, 4);
+    var endTime = parseInt(document.getElementById("endTime").innerHTML); //assumes 00:00:00 format
+    endTime.replace(":", "");
+    endTime = endTime.substring(0, 4);
+    var repeat = document.getElementById("repeat");
+}

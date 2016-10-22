@@ -105,7 +105,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
     var currtime = "" + currHour.toString() + currMinutes.toString();
     //First, find the difference between the current day of the week and the next scheduled repeat event
     var eventdays = nextevent.daysRepeated;
-    var ddate = 0; //number of days difference
+    var ddate = 0; //number of days difference between today and the next occurance of the event
     var matchingindex = -1; //in the case that the event takes place on the current day, this will match the index. I.E. Today is Wednesday, daysrepeated is MTWS, matchingindex = 2 for W.
     var j;
     var unit; //the specific day of the week identifier currently chosen
@@ -140,7 +140,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
     var nextoccurancenum; //the day ID of the next occurance of the event after the current day
 
     //edge case where event is currently happening or happened earlier today
-    if (currtime < nextevent.startTime && matchingindex > -1) {
+    if (currtime > nextevent.startTime && matchingindex > -1) {
         nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length());
         nextoccurancenum = 0;
         if (nextoccurance === "M") {

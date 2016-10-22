@@ -3,17 +3,10 @@ body {
     min-height: 500px;
 }
 
+#container {
+    text-align: center;
+}
+
  p {
  	text-align: center;
  }
-
- #tow { display: none; padding: 5px; }
-
-
-
-.alert{
-  display:none;
-}
-.span2:focus ~ .alert {
-  display: block;
-}

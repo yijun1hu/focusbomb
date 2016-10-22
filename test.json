@@ -3,13 +3,11 @@
     {
       "name": "Algorithms_Shutdown",
       "repeat": true,
-      "repeatedDays": {
-        "daysRepeated": "MTWRFSN",
+      "daysRepeated": "MTWRFSN",
         "exceptionDates": [
           "2016 12 24",
           "2016 12 26"
-        ]
-      },
+        ],
       "date": null,
       "startTime": "1400",
       "endTime": "1600",
@@ -18,10 +16,8 @@
     {
       "name": "Automata101",
       "repeat": false,
-      "repeatedDays": {
-        "daysRepeated": null,
-        "exceptionDates": []
-      },
+      "daysRepeated": null,
+      "exceptionDates": [],
       "date": "2016 12 24",
       "startTime": "1500",
       "endTime": "1800",

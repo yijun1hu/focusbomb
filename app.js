@@ -48,6 +48,37 @@ function readExistingEvent(name) {
 }
 
 /**
+ * Update an existing event from local storage
+ */
+function updateExistingEvent(name, type, repeat, repeatedDays, datesRepeated, exceptionDates, startTime, endTime, listName) {
+    var currstorage = JSON.parse(loadLocalStorage("events"));
+    var targeteventindex = -1;
+    var i = 0;
+    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
+        if (currstorage.events[i].name === name) {
+            targetleventindex = i;
+        }
+    }
+    if (targeteventindex === -1) {
+        alert("Failed to update event - the provided name does not match any existing events.");
+    } else {
+        var newevent = {
+            "name": name,
+            "type": type,
+            "repeat": repeat,
+            "repeatedDays": repeatedDays,
+            "datesRepeated": datesRepeated,
+            "exceptionDates": exceptionDates,
+            "startTime": startTime,
+            "endTime": endTime,
+            "listName": listName
+        };
+        currstorage.events.push(newevent);
+        setLocalStorage("events", JSON.stringify(currstorage));
+    }
+}
+
+/**
  * Create a new list and save it to local storage
  */
 function createNewList(name, type, color, sites) {

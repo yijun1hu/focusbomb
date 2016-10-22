@@ -6,6 +6,30 @@
 
 /* **************** Feature Functions **************** */
 
+//Following was adapted from https://github.com/tetsuwo/website-blocker-chrome.ext
+chrome.tabs.onCreated.addListener(function(tab) {
+    if (determineIsBlocked(tab.url)) {
+        blockPage(tab.id, tab.url);
+    }
+});
+
+chrome.tabs.onActivated.addListener(function(info) {
+    chrome.tabs.get(info.tabId, function(tab) {
+        if (determineIsBlocked(tab.url)) {
+            blockPage(tab.id, tab.url);
+        }
+    });
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if (changeInfo.status === "loading") {
+        if (determineIsBlocked(tab.url)) {
+            blockPage(tab.id, tab.url);
+        }
+        return;
+    }
+});
+
 /**
  * Block a tab by replacing it with a sample HTML page. Based off of tetsuwo's code
  * @param id the id of the current tab
@@ -20,7 +44,16 @@ function blockPage(id, url) {
  * Determine whether or not the given page is blocked (i.e. in an ongoing blacklist, not in an ongoing whitelist)
  */
 function determineIsBlocked(url) {
-    
+    var events = getAllEvents();
+    var i;
+    var list;
+    for (i = 0; i < events.length; i += 1) { //see all filters to see if there is a violation
+        list = readExistingList(events[i].listName); //gets the list object for the filter
+        if ((list.type === "b" && list.sites.contains(url)) || (list.type === "w" && !list.sites.contains(url))) {
+            return determineIsEventOngoing(events[i]); //checks the time slot for violations
+        }
+    }
+    return false;
 }
 
 /**
@@ -52,10 +85,13 @@ function getAllEvents() {
     var currYear = d.getYear();
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     var toSort = [];
-    var i = 0;
+    var i = 0; //event counter
     var nextevent;
     var eventmonthdate;
-    var newDateSTRING;
+    var newDateSTRING; //string for the exact date of the start of an event
+    var s; //insertion sort counter
+    var t; //insertion sort counter
+    var temp; //insertion sort temp variable
     for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
         //for sorting purposes, repeated events use next non-exception dates
         nextevent = currstorage.events[i];
@@ -75,10 +111,8 @@ function getAllEvents() {
         }
 
         //now do the sort. Insertion Sort.
-        var s;
-        var t;
         for (s = 1; s < toSort.length(); s += 1) {
-            var temp = toSort[s];
+            temp = toSort[s];
             t = s - 1;
             while (t >= 0 && toSort[t].date > temp.date) {
                 toSort[t + 1] = toSort[t];
@@ -114,29 +148,43 @@ function getRepeatingEventMonthDate(d, nextevent) {
         //test: if the event occurs on a given day, ensure that the edge case where the event has already passed is caught
         if (unit === "M") {
             ddate = Math.min(ddate, (0 - currDay) % 7);
-            if ((0 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((0 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "T") {
             ddate = Math.min(ddate, (1 - currDay) % 7);
-            if ((1 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((1 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "W") {
             ddate = Math.min(ddate, (2 - currDay) % 7);
-            if ((2 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((2 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "R") {
             ddate = Math.min(ddate, (3 - currDay) % 7);
-            if ((3 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((3 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "F") {
             ddate = Math.min(ddate, (4 - currDay) % 7);
-            if ((4 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((4 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "S") {
             ddate = Math.min(ddate, (5 - currDay) % 7);
-            if ((5 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((5 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         } else if (unit === "N") {
             ddate = Math.min(ddate, (6 - currDay) % 7);
-            if ((6 - currDay) % 7 === 0) {matchingindex = j;}
+            if ((6 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         }
     }
 
-    var nextoccurance; //the character for the day of the week of the next occurance of the event 
+    var nextoccurance; //the character for the day of the week of the next occurance of the event
     var nextoccurancenum; //the day ID of the next occurance of the event after the current day
 
     //edge case where event is currently happening or happened earlier today
@@ -157,7 +205,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
             nextoccurancenum = 5;
         } else if (nextoccurance === "N") {
             nextoccurancenum = 6;
-        } 
+        }
         ddate = (nextoccurancenum - currDay) % 7;
     }
 
@@ -391,4 +439,14 @@ function loadLocalStorage(key) {
  */
 function zerofillTwoDigits(input) {
     return ("00" + input).slice(-2);
+}
+
+function contains(a, obj) {
+    var i = a.length;
+    while (i--) {
+       if (a[i] === obj) {
+           return true;
+       }
+    }
+    return false;
 }

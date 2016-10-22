@@ -19,23 +19,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-    <script type="text/javascript">
-        var datefield=document.createElement("input")
-        datefield.setAttribute("type", "date")
-        if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
-            document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
-            document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
-            document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
-        }
-    </script>
-
-    <script>
-        if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
-            jQuery(function($){ //on document.ready
-                $('#birthday').datepicker();
-            })
-        }
-    </script>
+    <link href= 'js/repeat.js'>
 </head>
 
 <body>
@@ -49,20 +33,27 @@
         <br>
          <b>End Time:</b>
         <input type="time" id="endTime">
-        <b>End Time:</b>
-        <input type="time" id="endTime">
         <br>
-        <table style="width:100%">
-        <tr>
-            <td>Monday: <input type="checkbox" /></td>
-            <td>Tuesday: <input type="checkbox" /></td>
-            <td>Wednesday: <input type="checkbox" /></td>
-            <td>Thursday: <input type="checkbox" /></td>
-            <td>Friday: <input type="checkbox" /></td>
-            <td>Saturday: <input type="checkbox" /></td>
-            <td>Sunday: <input type="checkbox" /></td>
-        </tr>      
-        </table>
+
+        <input type="button" name="answer" value="Show Div" onclick="showDiv()" />
+        <div id="welcomeDiv"  style="display:none;" class="answer_list" > WELCOME</div>
+
+        <div id="content">
+            <table style="width:100%">
+            <tr>
+                <td>Monday: <input type="checkbox" id="m"/></td>
+                <td>Tuesday: <input type="checkbox" id="t"/></td>
+                <td>Wednesday: <input type="checkbox" id="w"/></td>
+                <td>Thursday: <input type="checkbox" id="r"/></td>
+                <td>Friday: <input type="checkbox" id="f"/></td>
+                <td>Saturday: <input type="checkbox" id="s"/></td>
+                <td>Sunday: <input type="checkbox" id="n"/></td>
+            </tr>      
+            </table>
+        </div>
+
+
+
         <input type="button" value="Submit" name="B1"></p>
     </form>
 </body>

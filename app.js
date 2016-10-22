@@ -34,7 +34,7 @@ function getAllEvents() {
             var j;
             for (j = 0; j < eventdays.length(); j += 1) { //for every day it repeats
                 var unit = eventdays.charAt(j); // get the value and test
-                //test: if the event occurs on a given day, 
+                //test: if the event occurs on a given day, ensure that the edge case where the event has already passed is caught
                 if (unit === "M") {
                     ddate = Math.min(ddate, (0 - currDay) % 7);
                     if ((0 - currDay) % 7 === 0) {matchingindex = j;}
@@ -103,8 +103,19 @@ function getAllEvents() {
             toSort.push({name: nextevent.name, date: newDateSTRING});
         }
 
-        //now do the sort
-        
+        //now do the sort. Insertion Sort.
+        int s;
+        int t;
+        for (s = 1; s < toSort.length()) {
+            var temp = toSort[s];
+            t = s - 1;
+            while (t >= 0 && toSort[t].date > temp.date) {
+                toSort[t + 1] = toSort[t];
+                t = t - 1;
+            }
+            toSort[t + 1] = temp;
+        }
+        return toSort;
     }
 
 }

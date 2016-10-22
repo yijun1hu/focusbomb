@@ -4,7 +4,7 @@
       "name": "Algorithms_Shutdown",
       "repeat": true,
       "repeatedDays": {
-        "datesRepeated": "MTWRFSN",
+        "daysRepeated": "MTWRFSN",
         "exceptionDates": [
           "2016 12 24",
           "2016 12 26"
@@ -19,7 +19,7 @@
       "name": "Automata101",
       "repeat": false,
       "repeatedDays": {
-        "datesRepeated": null,
+        "daysRepeated": null,
         "exceptionDates": []
       },
       "date": "2016 12 24",

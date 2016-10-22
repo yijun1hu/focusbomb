@@ -34,7 +34,7 @@ function createNewEvent(name, type, repeat, repeatedDays, datesRepeated, excepti
 
 /**
  * Read an existing event from local storage
- * @return javascript object referring to 
+ * @return javascript object referring to
  */
 function readExistingEvent(name) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
@@ -74,6 +74,26 @@ function updateExistingEvent(name, type, repeat, repeatedDays, datesRepeated, ex
             "listName": listName
         };
         currstorage.events.push(newevent);
+        setLocalStorage("events", JSON.stringify(currstorage));
+    }
+}
+
+/**
+ * Delete an existing event from local storage
+ */
+function deleteExistingEvent(name) {
+    var currstorage = JSON.parse(loadLocalStorage("events"));
+    var found = false;
+    var i = 0;
+    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
+        if (currstorage.events[i].name === name) {
+            currstorage.events = array.splice(i, 1); //remove the specific list
+            found = true;
+        }
+    }
+    if (!found) {
+        alert("Failed to delete event - the provided name does not match any existing events.");
+    } else {
         setLocalStorage("events", JSON.stringify(currstorage));
     }
 }

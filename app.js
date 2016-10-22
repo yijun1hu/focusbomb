@@ -30,26 +30,49 @@ function getAllEvents() {
             //First, find the difference between the current day of the week and the next scheduled repeat event
             var eventdays = nextevent.daysRepeated;
             var ddate = 0; //number of days difference
+            var matchingindex = -1; //in the case that the event takes place on the current day, this will match the index. I.E. Today is Wednesday, daysrepeated is MTWS, matchingindex = 2 for W.
             var j;
             for (j = 0; j < eventdays.length(); j += 1) { //for every day it repeats
                 var unit = eventdays.charAt(j); // get the value and test
                 //test: if the event occurs on a given day, 
                 if (unit === "M") {
                     ddate = Math.min(ddate, (0 - currDay) % 7);
+                    if ((0 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "T") {
                     ddate = Math.min(ddate, (1 - currDay) % 7);
+                    if ((1 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "W") {
                     ddate = Math.min(ddate, (2 - currDay) % 7);
+                    if ((2 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "R") {
                     ddate = Math.min(ddate, (3 - currDay) % 7);
+                    if ((3 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "F") {
                     ddate = Math.min(ddate, (4 - currDay) % 7);
+                    if ((4 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "S") {
                     ddate = Math.min(ddate, (5 - currDay) % 7);
+                    if ((5 - currDay) % 7 === 0) {matchingindex = j;}
                 } else if (unit === "N") {
                     ddate = Math.min(ddate, (6 - currDay) % 7);
+                    if ((6 - currDay) % 7 === 0) {matchingindex = j;}
                 }
             }
+
+            //edge case where event is currently happening or happened earlier today
+            if (currtime < starttime && matchingindex > -1) {
+                var nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length());
+                var nextoccurancenum = 0;
+                if (nextoccurance === "M") {nextoccurancenum = 0;}
+                else if (nextoccurance === "T") {nextoccurancenum = 1;}
+                else if (nextoccurance === "W") {nextoccurancenum = 2;}
+                else if (nextoccurance === "R") {nextoccurancenum = 3;}
+                else if (nextoccurance === "F") {nextoccurancenum = 4;}
+                else if (nextoccurance === "S") {nextoccurancenum = 5;}
+                else if (nextoccurance === "N") {nextoccurancenum = 6;}
+                ddate = (nextoccurancenum - currDay) % 7;
+            }
+
             //Then, adjust months and days (dates) based off of leap years and month transitions.
             var eventmonth = currMonth;
             var eventdate = currDate;

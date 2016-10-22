@@ -1,35 +1,48 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
     <title>Focus Bomb</title>
 
-
-     <link rel='stylesheet' href='css/style.css'>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel='stylesheet' href='css/style.css'>
     <script src="app.js"></script>
     <script src="bridge.js"></script>
+    <script src="js/repeat.js"></script>
+
 </head>
 
 <body>
-    <form action="calender.html">
-        <input type="submit" value="Add a New Date" />
+    <form id ="input">
+        <p> Add a New BlackOut/White Out List<p>
+        <b>Date:</b>
+        <input type="date" size="20"/>
+        <br>
+        <b>Begin Time:</b>
+        <input type="time" id="startTime">
+        <br>
+         <b>End Time:</b>
+        <input type="time" id="endTime">
+        <br>
+
+        <p>Repeat</p>
+        <div id="content">
+            <table style="width:100%">
+            <tr>
+                <td>Monday: <input type="checkbox" id="m">
+                <td>Tuesday: <input type="checkbox" id="t"/></td>
+                <td>Wednesday: <input type="checkbox" id="w"/></td>
+                <td>Thursday: <input type="checkbox" id="r"/></td>
+                <td>Friday: <input type="checkbox" id="f"/></td>
+                <td>Saturday: <input type="checkbox" id="s"/></td>
+                <td>Sunday: <input type="checkbox" id="n"/></td>
+             </tr>      
+            </table>
+        </div>
+
+        <input type="button" value="Submit"  onclick=myFunction()"></p>
     </form>
     
     <p>Print out current black out times and trash them if needed</p>
     
 
 </body>
-</html>
+</html-->
 
 

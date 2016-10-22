@@ -30,7 +30,7 @@
           "type":"w",
           "color":"#FFFF00",
           "name": "FIREFLY",
-          "web":[
+          "sites":[
             "twitter.com",
             "facebook.com",
             "pong.com"
@@ -40,7 +40,7 @@
           "type":"b",
           "color":"#800000",
           "name": "FRIENDLY",
-          "web":[
+          "sites":[
             "twitter.com",
             "facebook.com",
             "pong.com"

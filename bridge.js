@@ -23,12 +23,11 @@ function CreateDummyEvents() {
  * @return array of all next 20 events, sorted by date
  */
 function getNextEvents() {
-
     var next = getAllEvents();
-    if (next.length() < 20) {
+    if (next.length() < 5) {
         var max = next.length()
     } else {
-        var max = 20;
+        var max = 5;
     }
     for (i = 0; i < max ; i += 1) { //ensure that a event with the same name DNE
         var s = next.name + "," + next.date+"\n";
@@ -50,4 +49,23 @@ function MEvent() {
     endTime.replace(":", "");
     endTime = endTime.substring(0, 4);
     var repeat = document.getElementById("repeat");
+}
+
+/**
+ * Creates a new list white or black for future events.
+ */
+function MList() {
+    var lname = document.getElementById("listName").value;
+    var ccolor = "#cccccc";
+    if (document.getElementById("whitelist").value) {
+        var ttype = "w";
+    } else {
+        var ttype = "b";
+    }
+    var ssites = document.getElementById("listWebsites").value;
+    ssites = ssites.replace(/\n/g, " ");
+    ssites = ssites.replace(/,/g, " ");
+    var dividesites = ssites.split(" ");
+    createNewList(lname, ttype, ccolor, dividesites);
+
 }

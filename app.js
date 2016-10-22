@@ -6,6 +6,10 @@
 
 /* **************** Feature Functions **************** */
 
+
+
+/* **************** CRUD Functions **************** */
+
 /**
  * Create a new event and save it to local storage
  */

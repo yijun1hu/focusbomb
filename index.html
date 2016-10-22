@@ -10,36 +10,47 @@
 
 <body>
     <form id ="input">
-        <p> Add a New BlackOut/White Out List<p>
-        <b>Date:</b>
-        <input type="date" size="20"/>
-        <br>
-        <b>Begin Time:</b>
-        <input type="time" id="startTime">
-        <br>
-         <b>End Time:</b>
-        <input type="time" id="endTime">
-        <br>
-
-        <p>Repeat</p>
+        <b> Add a New Event<b>
+        <p><b>Date:</b>
+        <input type="date" size="20"/></p>
+        
+        <p><b>Start Time:</b>
+        <input type="time" id="startTime"></p>
+        
+        <p><b>End Time:</b>
+        <input type="time" id="endTime"></p>
+        
+        <b>Repeat</b>
         <div id="content" style="text-align: center;">
-            <table style="width:70%; left:15%;">
-            <tr>
-                <td>Monday: <input type="checkbox" id="m">
-                <td>Tuesday: <input type="checkbox" id="t"/></td>
-                <td>Wednesday: <input type="checkbox" id="w"/></td>
-                <td>Thursday: <input type="checkbox" id="r"/></td>
-                <td>Friday: <input type="checkbox" id="f"/></td>
-                <td>Saturday: <input type="checkbox" id="s"/></td>
-                <td>Sunday: <input type="checkbox" id="n"/></td>
-             </tr>      
-            </table>
+            <p>
+                Monday: <input type="checkbox" id="m"/> &nbsp;
+                Tuesday: <input type="checkbox" id="t"/> &nbsp;
+                Wednesday: <input type="checkbox" id="w"/>&nbsp;
+                Thursday: <input type="checkbox" id="r"/>&nbsp;
+                Friday: <input type="checkbox" id="f"/>&nbsp;
+                Saturday: <input type="checkbox" id="s"/>&nbsp;
+                Sunday: <input type="checkbox" id="n"/>
+            </p>
         </div>
+        <input type="button" value="Submit"  onclick=myFunction()"></p>
+    </form>
+    <hr>
+    <form>
+        <p><b>Black List / White List</b></p>
+        
+        <p><b>Name of the List : <input type="text" id="nameList"></b></p>
+        
+        <p><b>Websites that we want to black/white list, seperate by comma or new line:</b></p>
+
+        <p><textarea id="websitesList" type="text;" rows="4" cols="50"></textarea></p>
+
+        <p><b>WhiteList: <input type="checkbox" id="white"/> &nbsp; BlackList: <input type="checkbox" id="black"/></b></p>
 
         <input type="button" value="Submit"  onclick=myFunction()"></p>
     </form>
-    
-    <p>Print out current black out times and trash them if needed</p>
+    <hr>
+    <p><b>Current Events</b></p>
+    <div id="eventList"></div>
     
 
 </body>

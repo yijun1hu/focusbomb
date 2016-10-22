@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
+<head>
     <title>Focus Bomb</title>
 
     <link rel='stylesheet' href='css/style.css'>
@@ -9,12 +10,16 @@
 </head>
 
 <body>
-    <p style= "font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
+    <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
     <form id="newEvent">
-        <b> Add a New Event<b>
-        <p><b>Date:</b>
-        <input type="date" size="20" id="inputDate" /></p>
+        <p>
+            <b>Add a New Event</b>
+        </p>
+        <p>
+            <b>Date:</b>
+            <input type="date" size="20" id="inputDate" />
+        </p>
         
         <p><b>Start Time:</b>
         <input type="time" id="startTime"></p>
@@ -34,7 +39,7 @@
                 Sunday: <input type="checkbox" id="dayN"/>
             </p>
         </div>
-        <input type="button" value="Submit" onclick="myFunction()"></p>
+        <input type="button" value="Submit" onclick="MEvent()"></p>
     </form>
     <hr>
 
@@ -50,7 +55,7 @@
 
         <p><b>WhiteList: <input type="checkbox" id="whitelist"/> &nbsp; BlackList: <input type="checkbox" id="blacklist"/></b></p>
 
-        <input type="button" value="Submit"  onclick="myFunction()"></p>
+        <input type="button" value="Submit" onclick="MList()"></p>
     </form>
     <hr>
 
@@ -60,6 +65,6 @@
         
     </div>
 </body>
-</html-->
+</html>
 
 

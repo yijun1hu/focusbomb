@@ -1,10 +1,10 @@
 
   {
-    "alarms":[
+    "event":[
       {
        "repeat":true,
        "repeated_days":{
-        "datesRepeated":"MTWRFAN",
+        "datesRepeated":"MTWRFSN",
         "exceptiondates":[
           "2016 12 24",
           "2016 12 26"
@@ -12,14 +12,14 @@
        },
        "StartTime": "1400",
        "EndTime": "1600",
-       "name":"FIREFLY"
+       "listname":"FIREFLY"
       },
       {
        "repeat":false,
        "date":"2016 12 24",
        "StartTime": "1500",
        "EndTime":"1800",
-       "name":"FRIENDLY"
+       "listname":"FRIENDLY"
       }
       
       ]

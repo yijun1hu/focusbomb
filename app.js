@@ -7,6 +7,16 @@
 /* **************** Feature Functions **************** */
 
 /**
+ * Block a tab by replacing it with a sample HTML page. Based off of tetsuwo's code
+ * @param id the id of the current tab
+ * @param url the url on the current tab, which is currently blocked
+ */
+function blockPage(id, url) {
+    var redirect = chrome.extension.getURL("blocked.html") + "?url=" + encodeURIComponent(url);
+    chrome.tabs.update(id, {url: redirect});
+}
+
+/**
  * Get the names of all events
  * @return array of all event names, sorted by date
  */

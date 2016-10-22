@@ -3,11 +3,13 @@
   "name": "Focus Bomb",
   "description": "Use a calender and increase your productiveness, by kicking you out of certain websites!",
   "version": "1.0.0",
-
+  "background": {
+    "page": "background.html"
+  },
   "browser_action": {
-   "default_popup": "index.html"
+    "default_popup": "index.html"
   },
   "permissions": [
-   "activeTab"
-   ]
+    "activeTab"
+  ]
 }

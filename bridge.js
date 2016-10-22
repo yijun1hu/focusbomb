@@ -19,6 +19,45 @@ function CreateDummyEvents() {
 }
 
 /**
+ * Obtain data from the front-end and convert that into a new event
+ */
+function MEvent() {
+    var inputDate = document.getElementById("inputDate").value;
+    inputDate.replace("-", " "); //convert the output into the required format
+    var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
+    startTime.replace(":", "");
+    startTime = startTime.substring(0, 4);
+    var endTime = parseInt(document.getElementById("endTime").value); //assumes 00:00:00 format
+    endTime.replace(":", "");
+    endTime = endTime.substring(0, 4);
+    var repeat = document.getElementById("repeat").checked;
+    var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
+        document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
+        document.getElementById("dayN").checked];
+    var datestring = "";
+    var i = 0;
+    for (i = 0; i < 7; i += 1) {
+        if (dates[i]) {
+            if (i === 0) {
+                datestring += "M";
+            } else if (i === 1) {
+                datestring += "T";
+            } else if (i === 2) {
+                datestring += "W";
+            } else if (i === 3) {
+                datestring += "R";
+            } else if (i === 4) {
+                datestring += "F";
+            } else if (i === 5) {
+                datestring += "S";
+            } else if (i === 6) {
+                datestring += "N";
+            }
+        }
+    }
+}
+
+/**
  * Get the name, date, and time of next twenty events
  * @return array of all next 20 events, sorted by date
  */
@@ -29,7 +68,6 @@ function getNextEvents() {
     for (i = 0; i < nextEvents.length; i ++) {
         printOut = nextEvents[i] +"<br>";
     }
-
     /*if (next.length() < 20) {
         var max = next.length()
     } else {

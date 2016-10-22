@@ -13,7 +13,7 @@
 /**
  * Create a new event and save it to local storage
  */
-function createNewEvent(name, type, repeat, repeatedDays, datesRepeated, exceptionDates, startTime, endTime, listName) {
+function createNewEvent(name, repeat, repeatedDays, daysRepeated, exceptionDates, date, startTime, endTime, listName) {
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     var i = 0;
     for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
@@ -23,11 +23,11 @@ function createNewEvent(name, type, repeat, repeatedDays, datesRepeated, excepti
     }
     var newevent = {
         "name": name,
-        "type": type,
         "repeat": repeat,
         "repeatedDays": repeatedDays,
-        "datesRepeated": datesRepeated,
+        "daysRepeated": daysRepeated,
         "exceptionDates": exceptionDates,
+        "date": date,
         "startTime": startTime,
         "endTime": endTime,
         "listName": listName
@@ -54,7 +54,7 @@ function readExistingEvent(name) {
 /**
  * Update an existing event from local storage
  */
-function updateExistingEvent(name, type, repeat, repeatedDays, datesRepeated, exceptionDates, startTime, endTime, listName) {
+function updateExistingEvent(name, repeat, repeatedDays, daysRepeated, exceptionDates, date, startTime, endTime, listName) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
     var targeteventindex = -1;
     var i = 0;
@@ -68,11 +68,11 @@ function updateExistingEvent(name, type, repeat, repeatedDays, datesRepeated, ex
     } else {
         var newevent = {
             "name": name,
-            "type": type,
             "repeat": repeat,
             "repeatedDays": repeatedDays,
-            "datesRepeated": datesRepeated,
+            "daysRepeated": daysRepeated,
             "exceptionDates": exceptionDates,
+            "date": date,
             "startTime": startTime,
             "endTime": endTime,
             "listName": listName

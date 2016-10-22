@@ -7,7 +7,7 @@
 /**
  * Create a new list and save it to local storage
  */
-function createNewList(String name, String type, String[] sites) {
+function createNewList(String name, String type, String color, String[] sites) {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
     var i = 0;
     for (i = 0; i < currstorage.lists.length(); i++) { //ensure that a list with the same name DNE
@@ -18,6 +18,7 @@ function createNewList(String name, String type, String[] sites) {
     var newlist = {
         "name" : name,
         "type" : type,
+        "color" : color,
         "sites" : sites
     };
     currstorage.lists.push(newlist);
@@ -26,9 +27,16 @@ function createNewList(String name, String type, String[] sites) {
 
 /**
  * Read an existing list from local storage
+ * @return javascript object referring to 
  */
-function ReadNewList(String name, String type, String[] sites) {
-    
+function readExistingList(String name) {
+    var currstorage = JSON.parse(loadLocalStorage("lists"));
+    var i = 0;
+    for (i = 0; i < currstorage.lists.length(); i++) { //find the specific list
+        if (currstorage.lists[i].name === name) {
+            return currstorage.lists[i];
+        }
+    }   
 }
 
 

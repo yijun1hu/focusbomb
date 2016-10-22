@@ -7,6 +7,32 @@
 /* **************** Feature Functions **************** */
 
 /**
+ * Create a new event and save it to local storage
+ */
+function createNewEvent(name, type, repeat, repeatedDays, datesRepeated, exceptionDates, startTime, endTime, listName) {
+    var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
+    var i = 0;
+    for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
+        if (currstorage.events[i].name === name) {
+            alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
+        }
+    }
+    var newevent = {
+        "name": name,
+        "type": type,
+        "repeat": repeat,
+        "repeatedDays": repeatedDays,
+        "datesRepeated": datesRepeated,
+        "exceptionDates": exceptionDates,
+        "startTime": startTime,
+        "endTime": endTime,
+        "listName": listName
+    };
+    currstorage.lists.push(newevent);
+    setLocalStorage("events", JSON.stringify(currstorage));
+}
+
+/**
  * Create a new list and save it to local storage
  */
 function createNewList(name, type, color, sites) {

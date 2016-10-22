@@ -127,6 +127,9 @@ function getAllEvents() {
  */
 function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startTime, endTime, listName) {
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
+    if (endTime < startTime) {
+        alert("Failed to create new event - end time occurs before start time.");
+    }
     var i = 0;
     for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
         if (currstorage.events[i].name === name) {

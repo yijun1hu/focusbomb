@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <form id ="input">
+    <p style= "font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
+    <!--Create An Event-->
+    <form id="newEvent">
         <b> Add a New Event<b>
         <p><b>Date:</b>
-        <input type="date" size="20"/></p>
+        <input type="date" size="20" id="inputDate" /></p>
         
         <p><b>Start Time:</b>
         <input type="time" id="startTime"></p>
@@ -20,39 +22,43 @@
         <p><b>End Time:</b>
         <input type="time" id="endTime"></p>
         
-        <b>Repeat</b>
+        <b>Repeat: <input type="checkbox" id="repeat"/></b>
         <div id="content" style="text-align: center;">
             <p>
-                Monday: <input type="checkbox" id="m"/> &nbsp;
-                Tuesday: <input type="checkbox" id="t"/> &nbsp;
-                Wednesday: <input type="checkbox" id="w"/>&nbsp;
-                Thursday: <input type="checkbox" id="r"/>&nbsp;
-                Friday: <input type="checkbox" id="f"/>&nbsp;
-                Saturday: <input type="checkbox" id="s"/>&nbsp;
-                Sunday: <input type="checkbox" id="n"/>
+                Monday: <input type="checkbox" id="dayM"/> &nbsp;
+                Tuesday: <input type="checkbox" id="dayT"/> &nbsp;
+                Wednesday: <input type="checkbox" id="dayW"/>&nbsp;
+                Thursday: <input type="checkbox" id="dayR"/>&nbsp;
+                Friday: <input type="checkbox" id="dayF"/>&nbsp;
+                Saturday: <input type="checkbox" id="dayS"/>&nbsp;
+                Sunday: <input type="checkbox" id="dayN"/>
             </p>
         </div>
-        <input type="button" value="Submit"  onclick=myFunction()"></p>
+        <input type="button" value="Submit" onclick="myFunction()"></p>
     </form>
     <hr>
-    <form>
+
+    <!--Create A List-->
+    <form id="newList">
         <p><b>Black List / White List</b></p>
         
-        <p><b>Name of the List : <input type="text" id="nameList"></b></p>
+        <p><b>Name of the List: <input type="text" id="listName"></b></p>
         
         <p><b>Websites that we want to black/white list, seperate by comma or new line:</b></p>
 
-        <p><textarea id="websitesList" type="text;" rows="4" cols="50"></textarea></p>
+        <p><textarea id="listWebsites" type="text;" rows="4" cols="50"></textarea></p>
 
-        <p><b>WhiteList: <input type="checkbox" id="white"/> &nbsp; BlackList: <input type="checkbox" id="black"/></b></p>
+        <p><b>WhiteList: <input type="checkbox" id="whitelist"/> &nbsp; BlackList: <input type="checkbox" id="blacklist"/></b></p>
 
-        <input type="button" value="Submit"  onclick=myFunction()"></p>
+        <input type="button" value="Submit"  onclick="myFunction()"></p>
     </form>
     <hr>
-    <p><b>Current Events</b></p>
-    <div id="eventList"></div>
-    
 
+    <!--Print Out Future Events-->
+    <p><b>Current Events</b></p>
+    <div id="futureEvents">
+        
+    </div>
 </body>
 </html-->
 

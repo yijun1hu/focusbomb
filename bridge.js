@@ -16,7 +16,6 @@ function CreateDummyEvents() {
     createNewEvent("man", false, null, null, "2016 10 31", 400, 600, "Blue");
     createNewEvent("two", false, null, null, "2016 10 22", 1600, 2200, "Seven");
 
-
 }
 
 /**

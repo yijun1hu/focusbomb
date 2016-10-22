@@ -39,12 +39,31 @@
 </head>
 
 <body>
-    <form action="calender.html">
-        <input type="submit" value="Add a New Date" />
+    <form>
+        <p> Add a New BlackOut/White Out List<p>
+        <b>Date:</b>
+        <input type="date" size="20"/>
+        <br>
+        <b>Begin Time:</b>
+        <input type="time" id="startTime">
+        <br>
+         <b>End Time:</b>
+        <input type="time" id="endTime">
+        <b>End Time:</b>
+        <input type="time" id="endTime">
+        <br>
+        <table style="width:100%">
+        <tr>
+            <td>Monday: <input type="checkbox" /></td>
+            <td>Tuesday: <input type="checkbox" /></td>
+            <td>Wednesday: <input type="checkbox" /></td>
+            <td>Thursday: <input type="checkbox" /></td>
+            <td>Friday: <input type="checkbox" /></td>
+            <td>Saturday: <input type="checkbox" /></td>
+            <td>Sunday: <input type="checkbox" /></td>
+        </tr>      
+        </table>
+        <input type="button" value="Submit" name="B1"></p>
     </form>
-    
-    <p>Print out current black out times and trash them if needed</p>
 </body>
 </html>
-
-

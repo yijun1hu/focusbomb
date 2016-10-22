@@ -1,31 +1,34 @@
-
-  {
-    "events":[
-      {
-	  "name":"Algorithms_Shutdown",
-       "repeat":true,
-       "repeated_days":{
-        "datesRepeated":"MTWRFSN",
-        "exceptiondates":[
+{
+  "events": [
+    {
+      "name": "Algorithms_Shutdown",
+      "repeat": true,
+      "repeatedDays": {
+        "datesRepeated": "MTWRFSN",
+        "exceptionDates": [
           "2016 12 24",
           "2016 12 26"
-       ]
-       },
-       "StartTime": "1400",
-       "EndTime": "1600",
-       "listname":"FIREFLY"
+        ]
       },
-      {
-	   "name":"Automata101",
-       "repeat":false,
-       "date":"2016 12 24",
-       "StartTime": "1500",
-       "EndTime":"1800",
-       "listname":"FRIENDLY"
-      }
-      
-      ]
-  }
+      "date": null,
+      "startTime": "1400",
+      "endTime": "1600",
+      "listName": "FIREFLY"
+    },
+    {
+      "name": "Automata101",
+      "repeat": false,
+      "repeatedDays": {
+        "datesRepeated": null,
+        "exceptionDates": []
+      },
+      "date": "2016 12 24",
+      "startTime": "1500",
+      "endTime": "1800",
+      "listName": "FRIENDLY"
+    }
+  ]
+}
 
 
 

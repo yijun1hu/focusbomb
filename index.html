@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body onLoad="getNextEvents()">
     <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
     <form id="newEvent">
@@ -65,7 +65,8 @@
     <!--Print Out Future Events-->
     <p><b>Current Events</b></p>
     <div id="futureEvents">
-        
+        <p id="upcoming"></p>
+        <!-- name of the events  && time and date-->
     </div>
 </body>
 </html>

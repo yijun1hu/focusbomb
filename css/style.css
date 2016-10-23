@@ -1,6 +1,7 @@
 body {
     min-width: 800px;
-    min-height: 500px;
+    min-height: 1000px;
+    overflow-y: scroll; 
     text-align: center;
 }
 
@@ -12,3 +13,7 @@ table.center {
  p {
  	text-align: center;
  }
+
+.listDiv {
+	min-height: 30px;
+}

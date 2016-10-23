@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('submit-newlist').addEventListener('click', newListHandler);
     document.getElementById('submit-newevent').addEventListener('click', newEventHandler);
+    document.getElementById('delete-event').addEventListener('click', deleteEventHandler);
     getNextEvents();
     previouslyUsedList();
 });
@@ -16,4 +17,9 @@ function newListHandler() {
 function newEventHandler() {
     MEvent();
     getNextEvents();
+}
+
+function deleteEventHandler() {
+	deleteNextEvents();
+	getNextEvents();
 }

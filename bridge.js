@@ -196,9 +196,9 @@ function previouslyUsedList() {
 
 function convertTime (inputTime) {
     var timeSplit = inputTime.split(':');
-    var hours = timeSplit[0];
-    var minutes = timeSplit[1];
-    var strTime = (hours +""+minutes);
+    var hours = zerofillTwoDigits(timeSplit[0]);
+    var minutes = zerofillTwoDigits(timeSplit[1]);
+    var strTime = ("" + hours + minutes);
     return strTime;
 }
 
@@ -210,17 +210,17 @@ function covertBackTime (strTime) {
     hours = strTime[0] + "" + strTime[1];
     minutes = strTime[2] + "" + strTime[3];
 
-  if (hours > 12) {
-    meridian = 'PM';
-    hours -= 12;
-  } else if (hours < 12) {
-    meridian = 'AM';
-    if (hours == 0) {
-      hours = 12;
+    if (hours > 12) {
+        meridian = 'PM';
+        hours -= 12;
+    } else if (hours < 12) {
+        meridian = 'AM';
+        if (hours == 0) {
+            hours = 12;
+        }
+    } else {
+        meridian = 'PM';
     }
-  } else {
-    meridian = 'PM';
-  }
-  var readTime = hours + ':' + minutes + ' ' + meridian;
-  return readTime;
+    var readTime = hours + ':' + minutes + ' ' + meridian;
+    return readTime;
 }

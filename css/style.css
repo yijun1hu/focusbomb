@@ -14,6 +14,17 @@ table.center {
  	text-align: center;
  }
 
+#futureEvents {
+    width: 100%;
+}
+
 .listDiv {
 	min-height: 30px;
+    border: 3px solid #4488FF;
+    background-color: #CCEEFF;
+    border-radius: 12px;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }

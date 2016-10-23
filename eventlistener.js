@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function newListHandler() {
+    previouslyUsedList();
     MList();
 }
 

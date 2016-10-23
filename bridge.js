@@ -65,11 +65,24 @@ function MEvent() {
  */
 function getNextEvents() {
 
-    CreateDummyEvents();
+    /*CreateDummyEvents();*/
     var nextEvents = getAllEvents();
     var printOut = "";
-    for (i = 0; i < nextEvents.length; i ++) {
-        printOut = nextEvents[i] +"<br>";
+    var list;
+    for (var i = 0; i < nextEvents.length; i ++) {
+        list = readExistingEvent(nextEvents[i]);
+        if (list.repeat) {
+            var stringEvents = stringifyEvent(list.daysRepeated);
+
+
+             printOut += "<div id='futureEvents'>" + list.name + " , " +
+            stringEvents+  " , "+ list.exceptionDates + " , " + list.startTime + " , "
+            + list.endTime+"<br></div>";
+        } else {
+            printOut += "<div id='futureEvents'>" + list.name + " , " +
+            list.date + " , " + list.startTime + " , "
+            + list.endTime+"<br></div>";
+        }
     }
     /*if (next.length() < 20) {
         var max = next.length()
@@ -82,7 +95,7 @@ function getNextEvents() {
         list = readExistingList(i)
         var s = next.name + "," + readExistingList.date+"," + nex+"\n";
     }*/
-    document.getElementById("futureEvents").innerHTML = printOut;
+    document.getElementById("testJennifer").innerHTML = printOut;
 }
 
 /**
@@ -105,4 +118,28 @@ function MList() {
     var dividesites = ssites.split(" ");
     createNewList(lname, ttype, ccolor, dividesites);
     var ttest = readExistingList(lname);
+}
+
+function stringifyEvent(weekEvent) {
+    var printWeekEvent = "";
+    var unit;
+    for (var j = 0; j < weekEvent.length; j += 1) {
+        unit = weekEvent.charAt(j); 
+        if (unit === "M") {
+            printWeekEvent += "Mon ";
+        } else if (unit === "T") {
+             printWeekEvent += "Tues ";
+        } else if (unit === "W") {
+             printWeekEvent += "Wed ";
+        } else if (unit === "R") {
+            printWeekEvent += "Thur ";
+        } else if (unit === "F") {
+             printWeekEvent += "Fri ";
+        } else if (unit === "S") {
+             printWeekEvent += "Sat ";
+        } else if (unit === "N") {
+            printWeekEvent += "Sun ";
+        }
+    }
+    return printWeekEvent;
 }

@@ -61,7 +61,7 @@ function getAllEvents() {
     var currYear = d.getYear();
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (currstorage === null) {
-        alert("Failed to get events - there are no events in the system. Please consider adding an event.");
+        console.log("Failed to get events - there are no events in the system. Please consider adding an event.");
         return;
     }
     var toSort = [];
@@ -221,7 +221,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
 function getAllLists() {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
     if (currstorage === null) {
-        alert("Failed to get lists - there are no lists in the system. Please consider adding an lists.");
+        console.log("Failed to get lists - there are no lists in the system. Please consider adding an lists.");
         return;
     }
     var i = 0; //list counter

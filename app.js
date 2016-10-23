@@ -336,7 +336,7 @@ function deleteExistingEvent(name) {
     var i = 0;
     for (i = 0; i < currstorage.events.length; i += 1) { //find the specific list
         if (currstorage.events[i].name === name) {
-            currstorage.events = currstorage.events.splice(i, 1); //remove the specific list
+            currstorage.events.splice(i, 1); //remove the specific list
             found = true;
         }
     }
@@ -439,7 +439,7 @@ function deleteExistingList(name) {
     var i = 0;
     for (i = 0; i < currstorage.lists.length; i += 1) { //find the specific list
         if (currstorage.lists[i].name === name) {
-            currstorage.lists = currstorage.lists.splice(i, 1); //remove the specific list
+            currstorage.lists.splice(i, 1); //remove the specific list
             found = true;
         }
     }

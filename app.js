@@ -12,7 +12,7 @@
  * @param url the url on the current tab, which is currently blocked
  */
 function blockPage(id, url) {
-    var redirect = chrome.extension.getURL("blocked.html") + "?url=" + encodeURIComponent(url);
+    var redirect = chrome.extension.getURL("blocked.html");// + "?url=" + encodeURIComponent(url);
     chrome.tabs.update(id, {url: redirect});
 }
 

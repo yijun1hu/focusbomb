@@ -49,8 +49,8 @@ function determineIsEventOngoing(nextevent) {
         dateSTART = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.startTime;
         dateEND = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.endTime;
     } else {
-        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.startTime.substring(0, 2)), parseInt(nextevent.startTime.substring(2, 4)), 0, 0);
-        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
+        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)) - 1, parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.startTime.substring(0, 2)), parseInt(nextevent.startTime.substring(2, 4)), 0, 0);
+        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)) - 1, parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
     }
     return dateSTART <= d && d < dateEND;
 }
@@ -203,7 +203,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
         eventdate = (eventdate + ddate) % 31;
     } else if ((currMonth === 4 || currMonth === 6 || currMonth === 9 || currMonth === 11) && currDate + ddate > 30) {
         eventmonth += 1;
-        eventdate = (eventdate + ddate) % 39;
+        eventdate = (eventdate + ddate) % 30;
     } else if (currMonth === 2 && currYear % 4 === 0 && currDate + ddate > 29) {
         eventmonth += 1;
         eventdate = (eventdate + ddate) % 29;

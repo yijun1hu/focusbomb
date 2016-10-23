@@ -96,11 +96,11 @@ function getNextEvents() {
 
             printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
             stringEvents +  " , " + stringException + " , " + sTime + " , "
-            + eTime + " , " + list.listName + "<input type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
+            + eTime + " , " + list.listName + "<input style='margin-left:10px;' type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
         } else {
             printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
             list.date + " , " + sTime + " , "
-            + eTime + " , " + list.listName + "<input type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
+            + eTime + " , " + list.listName + "<input style='margin-left:10px;' type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
         }
     }
     document.getElementById("futureEvents").innerHTML = printOut;

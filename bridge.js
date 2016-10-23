@@ -24,7 +24,7 @@ function CreateDummyEvents() {
 function MEvent() {
     var listChoice = document.getElementById("listsAvailable");
     if (listChoice === null) {
-        alert("Please create a new list below!");   
+        alert("Please create a new list below!");
     } else {
         var ename = document.getElementById("eventName").value;
         var inputDate = document.getElementById("inputDate").value;
@@ -34,8 +34,8 @@ function MEvent() {
         var eTime = document.getElementById("endTime").value;
         var endTime = convertTime(eTime);
         var repeat = document.getElementById("repeat").checked;
-        var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
-            document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
+        var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked,
+            document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked,
             document.getElementById("dayN").checked];
         var listName = listChoice.options[listChoice.selectedIndex].value;
         var datestring = "";
@@ -75,15 +75,17 @@ function getNextEvents() {
         return;
     }
 
+    var max;
     if (nextEvents.length < 5) {
-        var max = nextEvents.length;
+        max = nextEvents.length;
     } else {
-        var max = 5;
+        max = 5;
     }
 
     var printOut = "";
     var list;
-    for (var i = 0; i < max; i ++) {
+    var i;
+    for (i = 0; i < max; i ++) {
         list = readExistingEvent(nextEvents[i]);
         if (list.repeat) {
             var stringEvents = stringifyEvent(list.daysRepeated);
@@ -126,7 +128,7 @@ function stringifyEvent(weekEvent) {
     var printWeekEvent = "";
     var unit;
     for (var j = 0; j < weekEvent.length; j += 1) {
-        unit = weekEvent.charAt(j); 
+        unit = weekEvent.charAt(j);
         if (unit === "M") {
             printWeekEvent += "Mon ";
         } else if (unit === "T") {

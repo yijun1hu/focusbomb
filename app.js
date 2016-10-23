@@ -49,12 +49,9 @@ function determineIsEventOngoing(nextevent) {
         dateSTART = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.startTime;
         dateEND = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.endTime;
     } else {
-        alert("Testing 1.31");
-        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.beginTime.substring(0, 2)), parseInt(nextevent.beginTime.substring(2, 4)), 0, 0);
-        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
-        alert("Testing 1.32");
+        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.startTime.substring(0, 2)), parseInt(nextevent.startTime.substring(2, 4)), 0, 0);
+        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
     }
-    alert("Testing 2");
     return dateSTART <= d && d < dateEND;
 }
 

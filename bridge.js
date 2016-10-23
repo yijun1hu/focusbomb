@@ -29,18 +29,16 @@ function MEvent() {
         var ename = document.getElementById("eventName").value;
         var inputDate = document.getElementById("inputDate").value;
         inputDate.replace("-", " "); //convert the output into the required format
-        var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
-        //startTime.replace(":", "");
-        //startTime = startTime.substring(0, 4);
-        var endTime = parseInt(document.getElementById("endTime").value); //assumes 00:00:00 format
-        //endTime.replace(":", "");
-        //endTime = endTime.substring(0, 4);
+        var sTime = document.getElementById("startTime").value;
+        var startTime = convertTime(sTime);
+        var eTime = document.getElementById("endTime").value;
+        var endTime = convertTime(eTime);
         var repeat = document.getElementById("repeat").checked;
         var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
             document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
             document.getElementById("dayN").checked];
        var listName = listChoice.options[listChoice.selectedIndex].value;
-
+       
         var datestring = "";
         var i = 0;
         for (i = 0; i < 7; i += 1) {
@@ -193,6 +191,10 @@ function previouslyUsedList() {
     }
 }
 
-function replyclick(clickedId) {
-    alert(clickedId);
+function convertTime (inputTime) {
+    var timeSplit = inputTime.split(':');
+    var hours = timeSplit[0];
+    var minutes = timeSplit[1];
+    var strTime = (hours + minutes);
+    return strTime;
 }

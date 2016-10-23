@@ -23,8 +23,7 @@ function CreateDummyEvents() {
  */
 function MEvent() {
     var listChoice = document.getElementById("listsAvailable");
-    alert(listChoice);
-    if (listChoice == null) {
+    if (listChoice === null || listChoice === undefined || listChoice.selectedIndex === -1) {
         alert("Please create a new list below!");
     } else {
         var ename = document.getElementById("eventName").value;
@@ -39,6 +38,7 @@ function MEvent() {
         var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked,
             document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked,
             document.getElementById("dayN").checked];
+        alert(listChoice.selectedIndex);
         var listName = listChoice.options[listChoice.selectedIndex].value;
         var datestring = "";
         var i = 0;
@@ -87,7 +87,7 @@ function getNextEvents() {
     var printOut = "";
     var list;
     var i;
-    for (i = 0; i < max; i ++) {
+    for (i = 0; i < max; i += 1) {
         list = readExistingEvent(nextEvents[i]);
         var sTime = covertBackTime (list.startTime);
         var eTime = covertBackTime (list.endTime);
@@ -184,7 +184,7 @@ function previouslyUsedList() {
     var allList = getAllLists();
     if (allList != null) {
         var list;
-        var printLists= "";
+        var printLists = "";
         for (var i = 0; i < allList.length; i += 1) {
             list = readExistingList(allList[i]);
 
@@ -207,8 +207,8 @@ function covertBackTime (strTime) {
     var minutes;
     var meridian;
 
-    hours = strTime[0] +""+strTime[1];
-    minutes = strTime[2] +""+ strTime[3];
+    hours = strTime[0] + "" + strTime[1];
+    minutes = strTime[2] + "" + strTime[3];
 
   if (hours > 12) {
     meridian = 'PM';

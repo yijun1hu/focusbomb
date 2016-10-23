@@ -37,8 +37,7 @@ function MEvent() {
         var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
             document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
             document.getElementById("dayN").checked];
-       var listName = listChoice.options[listChoice.selectedIndex].value;
-       
+        var listName = listChoice.options[listChoice.selectedIndex].value;
         var datestring = "";
         var i = 0;
         for (i = 0; i < 7; i += 1) {
@@ -66,13 +65,13 @@ function MEvent() {
 
 /**
  * Get the name, date, and time of next twenty events
- * @return array of all next 20 events, sorted by date
+ * @return array of all next n events, sorted by date
  */
 function getNextEvents() {
     var nextEvents = getAllEvents();
     var maxEvent;
     if (nextEvents === null || nextEvents === undefined) {
-        alert("Unable to get next events - no events to get");
+        console.log("Unable to get next events - no events to get");
         return;
     }
 
@@ -90,14 +89,13 @@ function getNextEvents() {
             var stringEvents = stringifyEvent(list.daysRepeated);
             var stringException = stringifyExceptDate(list.exceptionDates);
 
-             printOut += "<div id="+list.name +">" + list.name + " , " +
-            stringEvents+  " , "+ stringException + " , " + list.startTime + " , "
-            + list.endTime+" , "+list.listName+"<br></div>";
+            printOut += "<div id=" + list.name + ">" + list.name + " , " +
+            stringEvents +  " , " + stringException + " , " + list.startTime + " , "
+            + list.endTime + " , "+list.listName + "<br></div>";
         } else {
-
-            printOut += "<div id="+list.name +">" + list.name + " , " +
+            printOut += "<div id=" + list.name + ">" + list.name + " , " +
             list.date + " , " + list.startTime + " , "
-            + list.endTime+" , "+list.listName+"<br></div>";
+            + list.endTime + " , "+list.listName + "<br></div>";
         }
     }
     document.getElementById("futureEvents").innerHTML = printOut;
@@ -122,7 +120,6 @@ function MList() {
     ssites = ssites.replace(/\s\s+/g, ' ');
     var dividesites = ssites.split(" ");
     createNewList(lname, ttype, ccolor, dividesites);
-
 }
 
 function stringifyEvent(weekEvent) {
@@ -151,20 +148,20 @@ function stringifyEvent(weekEvent) {
 
 function stringifyExceptDate(exceptionDates) {
     var printExceptDate = "[ ";
-    for (var i = 0; i < exceptionDates.length; i+=1) {
+    var i;
+    for (i = 0; i < exceptionDates.length; i += 1) {
         printExceptDate += (exceptionDates[i]);
         if (i != exceptionDates.length - 1) {
             printExceptDate += " , ";
         }
     }
-     printExceptDate += " ]";
+    printExceptDate += " ]";
     return printExceptDate;
 }
 
 /**
  * Turn the list object into string form
-*/
-
+ */
 function stringifyList(inputList) {
     var printList = "";
     printList = inputList.name + " (" + inputList.type + ") [" + inputList.color + "] - ";
@@ -182,10 +179,10 @@ function previouslyUsedList() {
     if (allList != null) {
         var list;
         var printLists= "";
-        for (var i = 0; i < allList.length; i+=1) {
+        for (var i = 0; i < allList.length; i += 1) {
             list = readExistingList(allList[i]);
 
-            printLists += "<option value='" + list.name + "''>" + list.name+"</option>";
+            printLists += "<option value='" + list.name + "''>" + list.name + "</option>";
         }
         document.getElementById("listsAvailable").innerHTML = printLists;
     }

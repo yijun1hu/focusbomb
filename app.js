@@ -173,7 +173,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
 
     //edge case where event is currently happening or happened earlier today
     if (currtime > nextevent.startTime && matchingindex > -1) {
-        nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length;
+        nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length);
         nextoccurancenum = 0;
         if (nextoccurance === "M") {
             nextoccurancenum = 0;

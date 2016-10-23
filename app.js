@@ -20,15 +20,15 @@ function blockPage(id, url) {
  * Determine whether or not the given page is blocked (i.e. in an ongoing blacklist, not in an ongoing whitelist)
  */
 function determineIsBlocked(url) {
-    var events = getAllEvents();
-    if (events === null || events === undefined) {
-        return;
+    var events = getAllEvents(); //array of NAMES
+    if (events === null || events === undefined || events.length === 0) {
+        return false;
     }
     var i;
     var list;
     for (i = 0; i < events.length; i += 1) { //see all filters to see if there is a violation
-        list = readExistingList(events[i].listName); //gets the list object for the filter
-        if ((list.type === "b" && list.sites.contains(url)) || (list.type === "w" && !list.sites.contains(url))) {
+        list = readExistingList(readExistingEvent(events[i]).listName); //gets the list object for the filter
+        if (list !== null && ((list.type === "b" && list.sites.contains(url)) || (list.type === "w" && !list.sites.contains(url)))) {
             return determineIsEventOngoing(events[i]); //checks the time slot for violations
         }
     }
@@ -65,7 +65,7 @@ function getAllEvents() {
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (currstorage === null) {
         console.log("Failed to get events - there are no events in the system. Please consider adding an event.");
-        return;
+        return [];
     }
     var toSort = [];
     var i = 0; //event counter
@@ -225,7 +225,7 @@ function getAllLists() {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
     if (currstorage === null) {
         console.log("Failed to get lists - there are no lists in the system. Please consider adding an lists.");
-        return;
+        return [];
     }
     var i = 0; //list counter
     var toreturn = [];
@@ -244,14 +244,14 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (endTime < startTime) {
         alert("Failed to create new event - end time occurs before start time.");
-        return;
+        return null;
     }
     if (currstorage !== null) {
         var i = 0;
         for (i = 0; i < currstorage.events.length; i += 1) { //ensure that a event with the same name DNE
             if (currstorage.events[i].name === name) {
                 alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
-                return;
+                return null;
             }
         }
     } else {
@@ -279,7 +279,7 @@ function readExistingEvent(name) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
     if (currstorage === null) {
         alert("Failed to read event - there are no events in the system. Please consider adding an event.");
-        return;
+        return null;
     }
     var i = 0;
     for (i = 0; i < currstorage.events.length; i += 1) { //find the specific event
@@ -394,6 +394,7 @@ function readExistingList(name) {
         }
     }
     alert("Failed to read list - the provided name does not match any existing lists.");
+    return null;
 }
 
 /**

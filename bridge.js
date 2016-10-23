@@ -206,8 +206,8 @@ function covertBackTime (strTime) {
     var minutes;
     var meridian;
 
-    hours = ((strTime[0] * 10) + strTime[1]);
-    minutes = ((strTime[2] * 10) + strTime[3]);
+    hours = strTime[0] +""+strTime[1];
+    minutes = strTime[2] +""+ strTime[3];
 
   if (hours > 12) {
     meridian = 'PM';

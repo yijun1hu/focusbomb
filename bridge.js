@@ -65,6 +65,10 @@ function MEvent() {
  */
 function getNextEvents() {
     var nextEvents = getAllEvents();
+    if (nextEvents === null || nextEvents === undefined) {
+        alert("Unable to get next events - no events to get");
+        return;
+    }
     var printOut = "";
     var list;
     for (var i = 0; i < nextEvents.length; i ++) {

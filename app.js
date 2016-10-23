@@ -214,6 +214,24 @@ function getRepeatingEventMonthDate(d, nextevent) {
     return [eventmonth, eventdate];
 }
 
+/**
+ * Get the names of all list
+ * @return array of all list names
+ */
+function getAllLists() {
+    var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
+    if (currstorage === null) {
+        alert("Failed to get lists - there are no lists in the system. Please consider adding an lists.");
+        return;
+    }
+    var i = 0; //list counter
+    var toreturn = [];
+    for (i = 0; i < currstorage.lists.length; i += 1) {
+        toreturn.push(currstorage.lists[i].name);
+    }
+    return toreturn;
+}
+
 /* **************** CRUD Functions **************** */
 
 /**

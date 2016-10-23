@@ -28,7 +28,7 @@ function MEvent() {
     } else {
         var ename = document.getElementById("eventName").value;
         var inputDate = document.getElementById("inputDate").value;
-        var fixedDate = inputDate.replace("-", " "); //convert the output into the required format
+        var fixedDate = inputDate.replace(/-/g, " "); //convert the output into the required format
         var sTime = document.getElementById("startTime").value;
         var startTime = convertTime(sTime);
 

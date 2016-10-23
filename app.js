@@ -358,6 +358,7 @@ function createNewList(name, type, color, sites) {
         for (i = 0; i < currstorage.lists.length; i += 1) { //ensure that a list with the same name DNE
             if (currstorage.lists[i].name === name) {
                 alert("Failed to create new list - the provided name belongs to a list that already exists. Please choose a different name.");
+                return;
             }
         }
     } else {

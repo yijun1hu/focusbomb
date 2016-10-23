@@ -101,7 +101,6 @@ function getNextEvents() {
  */
 function MList() {
     var lname = document.getElementById("listName").value;
-    document.getElementById("upcoming").innerHTML = lname;
 
     var ccolor = "#cccccc";
     var ttype;
@@ -113,9 +112,10 @@ function MList() {
     var ssites = document.getElementById("listWebsites").value;
     ssites = ssites.replace(/\n/g, " ");
     ssites = ssites.replace(/,/g, " ");
+    ssites = ssites.replace(/\s\s+/g, ' ');
     var dividesites = ssites.split(" ");
     createNewList(lname, ttype, ccolor, dividesites);
-    var ttest = readExistingList(lname);
+
 }
 
 function stringifyEvent(weekEvent) {

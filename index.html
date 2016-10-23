@@ -14,7 +14,7 @@
 
 </head>
 
-<body onLoad="getNextEvents()">
+<body onLoad="getNextEvents(), previouslyUsedList()">
     <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
     <form id="newEvent">
@@ -49,23 +49,11 @@
         </div>
 
 
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"> Use Previously Created Black/White List
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <div onclick="previousUsedList()">
+        <select id="listsAvailable">
+        </select>
 
 
-              <!--li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-              <li role="presentation" class="divider"></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" id ="">About Us</a></li-->
-            </ul>
-        </div>
-
-
-        <input type="button" value="Submit" onclick="MEvent()"></p>
+        <input type="button" value="Submit" onclick="MEvent(), getNextEvents()"></p>
     </form>
     <hr>
 
@@ -88,7 +76,6 @@
     <!--Print Out Future Events-->
     <p><b>Current Events</b></p>
     <div id="futureEvents"></div>
-    <div id="testJennifer"></div>
     <div id="testRichard"></div>
     <div id="testKiki"></div>
     <div id="testAndrew"></div>

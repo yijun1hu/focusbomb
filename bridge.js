@@ -26,15 +26,18 @@ function MEvent() {
     var inputDate = document.getElementById("inputDate").value;
     inputDate.replace("-", " "); //convert the output into the required format
     var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
-    startTime.replace(":", "");
-    startTime = startTime.substring(0, 4);
+    //startTime.replace(":", "");
+    //startTime = startTime.substring(0, 4);
     var endTime = parseInt(document.getElementById("endTime").value); //assumes 00:00:00 format
-    endTime.replace(":", "");
-    endTime = endTime.substring(0, 4);
+    //endTime.replace(":", "");
+    //endTime = endTime.substring(0, 4);
     var repeat = document.getElementById("repeat").checked;
     var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
         document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
         document.getElementById("dayN").checked];
+    var listChoice = document.getElementById("listsAvailable");
+    var listName = listChoice.options[listChoice.selectedIndex].value;
+
     var datestring = "";
     var i = 0;
     for (i = 0; i < 7; i += 1) {
@@ -56,7 +59,7 @@ function MEvent() {
             }
         }
     }
-    createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, null);
+    createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, listName);
 }
 
 /**
@@ -65,13 +68,21 @@ function MEvent() {
  */
 function getNextEvents() {
     var nextEvents = getAllEvents();
+    var maxEvent;
     if (nextEvents === null || nextEvents === undefined) {
         alert("Unable to get next events - no events to get");
         return;
     }
+
+    if (nextEvents.length < 10) {
+        var max = nextEvents.length;
+    } else {
+        var max = 10;
+    }
+
     var printOut = "";
     var list;
-    for (var i = 0; i < nextEvents.length; i ++) {
+    for (var i = 0; i < max; i ++) {
         list = readExistingEvent(nextEvents[i]);
         if (list.repeat) {
             var stringEvents = stringifyEvent(list.daysRepeated);
@@ -86,17 +97,6 @@ function getNextEvents() {
             + list.endTime+"<br></div>";
         }
     }
-    /*if (next.length() < 20) {
-        var max = next.length()
-    } else {
-        var max = 20;
-    }
-
-    var list;
-    for (i = 0; i < max ; i += 1) { //ensure that a event with the same name DNE
-        list = readExistingList(i)
-        var s = next.name + "," + readExistingList.date+"," + nex+"\n";
-    }*/
     document.getElementById("futureEvents").innerHTML = printOut;
 }
 
@@ -176,11 +176,18 @@ function stringifyList(inputList) {
 
 function previouslyUsedList() {
     var allList = getAllLists();
-    var list;
-    var printLists= "";
-    for (var i = 0; i < allList.length; i+=1) {
-        list = readExistingList(allList[i]);
-        printLists += "<li role='presentation'><a role='menuitem' tabindex='-1' id="+ list.name +">" + list.name+"</a></li>";
+    if (allList != null) {
+        var list;
+        var printLists= "";
+        for (var i = 0; i < allList.length; i+=1) {
+            list = readExistingList(allList[i]);
+
+            printLists += "<option value='" + list.name + "''>" + list.name+"</option>";
+        }
+        document.getElementById("listsAvailable").innerHTML = printLists;
     }
-    document.getElementById("testJennifer").innerHTML = printLists;
+}
+
+function replyclick(clickedId) {
+    alert(clickedId);
 }

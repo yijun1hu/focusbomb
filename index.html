@@ -9,7 +9,7 @@
 
 </head>
 
-<body onLoad="getNextEvents()">
+<body >
     <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
     <form id="newEvent">
@@ -58,16 +58,13 @@
 
         <p><b>WhiteList: <input type="checkbox" id="whitelist"/> &nbsp; BlackList: <input type="checkbox" id="blacklist"/></b></p>
 
-        <input type="button" value="Submit" onclick="MList()"></p>
+        <p><input type="button" value="Submit" onclick="MList()"></p>
     </form>
     <hr>
 
     <!--Print Out Future Events-->
     <p><b>Current Events</b></p>
-    <div id="futureEvents">
-        <p id="upcoming"></p>
-        <!-- name of the events  && time and date-->
-    </div>
+    <p id="futureEvents"></p>
 </body>
 </html>
 

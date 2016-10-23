@@ -82,7 +82,7 @@ function getNextEvents() {
         list = readExistingList(i)
         var s = next.name + "," + readExistingList.date+"," + nex+"\n";
     }*/
-    document.getElementById("upcoming").innerHTML = printOut;
+    document.getElementById("futureEvents").innerHTML = printOut;
 }
 
 /**

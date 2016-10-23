@@ -1,8 +1,41 @@
 body {
     min-width: 800px;
-    min-height: 1000px;
     overflow-y: scroll; 
     text-align: center;
+}
+
+#container {
+    background-color: #DDFFFF;
+}
+
+#newEvent {
+    border: 3px solid #FFCC88;
+    background-color: #FFDDAA;
+    border-radius: 12px;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#newList {
+    border: 3px solid #DDEE88;
+    background-color: #EEFFAA;
+    border-radius: 12px;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#eventList {
+    border: 3px solid #5599FF;
+    background-color: #DDEEFF;
+    border-radius: 12px;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 table.center {
@@ -23,8 +56,13 @@ table.center {
     border: 3px solid #4488FF;
     background-color: #CCEEFF;
     border-radius: 12px;
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+.button {
+    border-radius: 8px;
+    background-color: #e7e7e7;
 }

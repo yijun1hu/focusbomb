@@ -48,11 +48,13 @@
             </p>
         </div>
 
+	<p><b>Select Blacklist/Whitelist</b></p>
+
         <select id="listsAvailable">
         </select>
         
-        <br>
-        <p><input type="button" value="Submit" id="submit-newevent" /></p>
+        <br><br>
+        <p><input type="button" value="Submit New Event" id="submit-newevent" /></p>
     </form>
     <hr>
 
@@ -62,26 +64,20 @@
         
         <p><b>Name of the List: <input type="text" id="listName"></b></p>
         
-        <p><b>Websites that we want to black/white list, seperate by comma or new line:</b></p>
+        <p><b>Websites to black/white list, separate by comma or new line:</b></p>
 
         <p><textarea id="listWebsites" type="text;" rows="4" cols="50"></textarea></p>
 
-        <p><b>WhiteList: <input type="checkbox" id="whitelist"/> &nbsp; BlackList: <input type="checkbox" id="blacklist"/></b></p>
+        <p><b>WhiteList: <input type="radio" name="listtype" id="whitelist"/> &nbsp; BlackList: <input type="radio" name="listtype" id="blacklist"/></b></p>
 
-        <p><input type="button" value="Submit" id="submit-newlist" /></p>
+        <p><input type="button" value="Submit New List" id="submit-newlist" /></p>
     </form>
     <hr>
 
     <!--Print Out Future Events-->
     <p><b>Current Events</b></p>
-    <table id="futureEvents"></table>
-    <p><input type="button" value="Submit" id="delete-event" /></p>
-
-
-    <div id="testRichard"></div>
-    <div id="testKiki"></div>
-    <div id="testAndrew"></div>
-</body>
+    <div id="futureEvents"></div>
+    <p><input type="button" value="Delete Selected Events" id="delete-event" /></p>
 </html>
 
 

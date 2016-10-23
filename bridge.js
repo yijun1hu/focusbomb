@@ -96,16 +96,19 @@ function getNextEvents() {
 
             printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
             stringEvents +  " , " + stringException + " , " + sTime + " , "
-            + eTime + " , "+list.listName +"<input type='checkbox' id="+i+" + value='"+ list.name +"' /> </div>";
+            + eTime + " , " + list.listName + "<input type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
         } else {
             printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
             list.date + " , " + sTime + " , "
-            + eTime + " , "+list.listName +"<input type='checkbox' id=delete"+i+" + value='"+ list.name +"' /> </div>";
+            + eTime + " , " + list.listName + "<input type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
         }
     }
     document.getElementById("futureEvents").innerHTML = printOut;
 }
 
+/**
+ * Deletes all checked entries from localStorage
+ */
 function deleteNextEvents() {
     var deleteEvents =[];
     var j = 0;
@@ -113,27 +116,26 @@ function deleteNextEvents() {
 
     while (document.getElementById("delete" + j) != null) {
         deleteEvents.push(document.getElementById("delete" + j).value);
-        j+=1;
+        j += 1;
     }
     for (var i = 0; i < j; i++) {
-        if(document.getElementById("delete" + i).checked) {
-                alert(document.getElementById("delete" + i).value);
-                list=readExistingEvent(document.getElementById("delete" + i).value);
-                alert(list.name);
-                if(list.repeat == true) {
-                    list.exceptionDates.push("new date");
-                    updateExistingEvent(list.name,
-                        list.repeat,
-                        list.daysRepeated,
-                        list.exceptionDates,
-                        list.date,
-                        list.startTime,
-                        list.endTime,
-                        list.listName);
-                } else {
-                    deleteExistingEvent(list.name);
-                }
-        
+        if (document.getElementById("delete" + i).checked) {
+            //alert(document.getElementById("delete" + i).value);
+            list = readExistingEvent(document.getElementById("delete" + i).value);
+            //alert(list.name);
+            /*if(list.repeat == true) { //this is for exclusion dates, which is no longer part of our target features
+                list.exceptionDates.push("new date");
+                updateExistingEvent(list.name,
+                    list.repeat,
+                    list.daysRepeated,
+                    list.exceptionDates,
+                    list.date,
+                    list.startTime,
+                    list.endTime,
+                    list.listName);
+            } else {*/
+                deleteExistingEvent(list.name);
+            //}
         }
     }
 }

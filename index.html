@@ -14,14 +14,15 @@
 
 </head>
 
-<body style="background-color: #0000ff;">
-    <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
+<body>
+<div id="container">
+    <p style="font-size: 32px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
 
     <form id="newEvent">
-        <p>
+        <h3>
             <b>Add a New Event</b>
-        </p>
+        </h3>
         <p>
             <b>Name of the Event: <input type="text" id="eventName"></b>
         </p>
@@ -49,16 +50,16 @@
             </p>
         </div>
 
-	<p><b>Select Blacklist/Whitelist : </b><select id="listsAvailable"></select></p>
+        	<p><b>Select Blacklist/Whitelist : </b></p>
+            <select id="listsAvailable"></select>
         
         <br><br>
-        <p><input type="button" value="Submit New Event" id="submit-newevent" /></p>
+        <p><input type="button" class="button" value="Submit New Event" id="submit-newevent" /></p>
     </form>
-    <hr>
 
     <!--Create A List-->
     <form id="newList">
-        <p><b>Black List / White List</b></p>
+        <h3><b>Black List / White List</b></h3>
         
         <p><b>Name of the List: <input type="text" id="listName"></b></p>
         
@@ -68,14 +69,18 @@
 
         <p><b>WhiteList: <input type="radio" name="listtype" id="whitelist"/> &nbsp; BlackList: <input type="radio" name="listtype" id="blacklist"/></b></p>
 
-        <p><input type="button" value="Submit New List" id="submit-newlist" /></p>
+        <p><input type="button" class="button" value="Submit New List" id="submit-newlist" /></p>
     </form>
-    <hr>
 
     <!--Print Out Future Events-->
-    <p><b>Current Events</b></p>
+    <div id="eventList">
+    <h3><b>Current Events</b></h3>
     <div id="futureEvents"></div>
-    <p><input type="button" value="Delete Selected Events" id="delete-event" /></p>
+    <br>
+    <p><input type="button" class="button" value="Delete Selected Events" id="delete-event" /></p>
+    </div>
+</div>
+</body>
 </html>
 
 

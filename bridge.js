@@ -84,23 +84,21 @@ function getNextEvents() {
     }
 
     var printOut = "";
-    var list;
+    var currevent;
     var i;
     for (i = 0; i < max; i += 1) {
-        list = readExistingEvent(nextEvents[i]);
-        var sTime = covertBackTime (list.startTime);
-        var eTime = covertBackTime (list.endTime);
-        if (list.repeat) {
-            var stringEvents = stringifyEvent(list.daysRepeated);
-            var stringException = stringifyExceptDate(list.exceptionDates);
+        currevent = readExistingEvent(nextEvents[i]);
+        if (currevent.repeat) {
+            var stringEvents = stringifyEvent(currevent.daysRepeated);
+            var stringException = stringifyExceptDate(currevent.exceptionDates);
 
-            printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
-            stringEvents +  " , " + stringException + " , " + sTime + " , "
-            + eTime + " , " + list.listName + "<input style='margin-left:10px;' type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
+            printOut += "<div class='listDiv' id=" + currevent.name + ">" + currevent.name + ", " +
+            stringEvents +  ", " + stringException + ", " + currevent.startTime + "-"
+            + currevent.endTime + ", " + currevent.listName + "&nbsp;&nbsp;<input type='checkbox' id='delete" + i + "' + value='" + currevent.name + "' /> </div>";
         } else {
-            printOut += "<div class='listDiv' id=" + list.name + ">" + list.name + " , " +
-            list.date + " , " + sTime + " , "
-            + eTime + " , " + list.listName + "<input style='margin-left:10px;' type='checkbox' id='delete" + i + "' + value='" + list.name + "' /> </div>";
+            printOut += "<div class='listDiv' id=" + currevent.name + ">" + currevent.name + ", " +
+            currevent.date + ", " + currevent.startTime + "-"
+            + currevent.endTime + ", " + currevent.listName + "&nbsp;&nbsp;<input type='checkbox' id='delete" + i + "' + value='" + currevent.name + "' /> </div>";
         }
     }
     document.getElementById("futureEvents").innerHTML = printOut;

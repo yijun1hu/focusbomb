@@ -153,3 +153,18 @@ function stringifyExceptDate(exceptionDates) {
      printExceptDate += " ]";
     return printExceptDate;
 }
+
+/**
+ * Turn the list object into string form
+*/
+
+function stringifyList(inputList) {
+    var printList = "";
+    printList = inputList.name + " (" + inputList.type + ") [" + inputList.color + "] - ";
+    var i = 0;
+    for (i = 0; i < inputList.sites.length; i += 1) {
+        printList += inputList.sites[i];
+        printList += ", ";
+    }
+    return printList;
+}

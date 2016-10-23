@@ -7,9 +7,14 @@
     <script src="bridge.js"></script>
     <script src="js/repeat.js"></script>
 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
-<body >
+<body onLoad="getNextEvents()">
     <p style="font-size: 20px; font-weight: 100px;"><b>Focus Bomb</b></p>
     <!--Create An Event-->
     <form id="newEvent">
@@ -42,6 +47,21 @@
                 Sunday: <input type="checkbox" id="dayN"/>
             </p>
         </div>
+
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"> Use Previously Created Black/White List
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+            </ul>
+        </div>
+
+
         <input type="button" value="Submit" onclick="MEvent()"></p>
     </form>
     <hr>

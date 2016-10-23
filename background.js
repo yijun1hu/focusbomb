@@ -1,3 +1,5 @@
+alert("A");
+
 //Following was adapted from https://github.com/tetsuwo/website-blocker-chrome.ext
 chrome.tabs.onCreated.addListener(function(tab) {
     if (determineIsBlocked(tab.url)) {
@@ -24,3 +26,12 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         return;
     }
 });
+
+function checkCurrentTab() {
+    chrome.tabs.getSelected(null, function(tab) {
+        if (determineIsBlocked(tab.url)) {
+            console.log("checkCurrentTab - blocking page");
+            blockPage(tab.id, tab.url);
+        }
+    });
+};

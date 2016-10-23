@@ -21,6 +21,9 @@ function blockPage(id, url) {
  */
 function determineIsBlocked(url) {
     var events = getAllEvents();
+    if (events === null || events === undefined) {
+        return;
+    }
     var i;
     var list;
     for (i = 0; i < events.length; i += 1) { //see all filters to see if there is a violation

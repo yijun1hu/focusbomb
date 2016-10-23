@@ -1,5 +1,3 @@
-alert("A");
-
 //Following was adapted from https://github.com/tetsuwo/website-blocker-chrome.ext
 chrome.tabs.onCreated.addListener(function(tab) {
     if (determineIsBlocked(tab.url)) {

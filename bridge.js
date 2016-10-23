@@ -63,6 +63,7 @@ function MEvent() {
  */
 function getNextEvents() {
 
+    CreateDummyEvents();
     var nextEvents = getAllEvents();
     var printOut = "";
     for (i = 0; i < nextEvents.length; i ++) {

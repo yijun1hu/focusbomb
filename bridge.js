@@ -23,7 +23,8 @@ function CreateDummyEvents() {
  */
 function MEvent() {
     var listChoice = document.getElementById("listsAvailable");
-    if (listChoice === null) {
+    alert(listChoice);
+    if (listChoice == null) {
         alert("Please create a new list below!");
     } else {
         var ename = document.getElementById("eventName").value;

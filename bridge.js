@@ -22,6 +22,7 @@ function CreateDummyEvents() {
  * Obtain data from the front-end and convert that into a new event
  */
 function MEvent() {
+    var ename = document.getElementById("eventName").value;
     var inputDate = document.getElementById("inputDate").value;
     inputDate.replace("-", " "); //convert the output into the required format
     var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
@@ -55,6 +56,7 @@ function MEvent() {
             }
         }
     }
+    createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, null);
 }
 
 /**

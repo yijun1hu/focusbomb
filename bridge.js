@@ -22,44 +22,48 @@ function CreateDummyEvents() {
  * Obtain data from the front-end and convert that into a new event
  */
 function MEvent() {
-    var ename = document.getElementById("eventName").value;
-    var inputDate = document.getElementById("inputDate").value;
-    inputDate.replace("-", " "); //convert the output into the required format
-    var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
-    //startTime.replace(":", "");
-    //startTime = startTime.substring(0, 4);
-    var endTime = parseInt(document.getElementById("endTime").value); //assumes 00:00:00 format
-    //endTime.replace(":", "");
-    //endTime = endTime.substring(0, 4);
-    var repeat = document.getElementById("repeat").checked;
-    var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
-        document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
-        document.getElementById("dayN").checked];
     var listChoice = document.getElementById("listsAvailable");
-    var listName = listChoice.options[listChoice.selectedIndex].value;
+    if (listChoice === null) {
+        alert("Please create a new list below!");   
+    } else {
+        var ename = document.getElementById("eventName").value;
+        var inputDate = document.getElementById("inputDate").value;
+        inputDate.replace("-", " "); //convert the output into the required format
+        var startTime = parseInt(document.getElementById("startTime").value); //assumes 00:00:00 format
+        //startTime.replace(":", "");
+        //startTime = startTime.substring(0, 4);
+        var endTime = parseInt(document.getElementById("endTime").value); //assumes 00:00:00 format
+        //endTime.replace(":", "");
+        //endTime = endTime.substring(0, 4);
+        var repeat = document.getElementById("repeat").checked;
+        var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked, 
+            document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked, 
+            document.getElementById("dayN").checked];
+       var listName = listChoice.options[listChoice.selectedIndex].value;
 
-    var datestring = "";
-    var i = 0;
-    for (i = 0; i < 7; i += 1) {
-        if (dates[i]) {
-            if (i === 0) {
-                datestring += "M";
-            } else if (i === 1) {
-                datestring += "T";
-            } else if (i === 2) {
-                datestring += "W";
-            } else if (i === 3) {
-                datestring += "R";
-            } else if (i === 4) {
-                datestring += "F";
-            } else if (i === 5) {
-                datestring += "S";
-            } else if (i === 6) {
-                datestring += "N";
+        var datestring = "";
+        var i = 0;
+        for (i = 0; i < 7; i += 1) {
+            if (dates[i]) {
+                if (i === 0) {
+                    datestring += "M";
+                } else if (i === 1) {
+                    datestring += "T";
+                } else if (i === 2) {
+                    datestring += "W";
+                } else if (i === 3) {
+                    datestring += "R";
+                } else if (i === 4) {
+                    datestring += "F";
+                } else if (i === 5) {
+                    datestring += "S";
+                } else if (i === 6) {
+                    datestring += "N";
+                }
             }
         }
+        createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, listName);
     }
-    createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, listName);
 }
 
 /**
@@ -74,10 +78,10 @@ function getNextEvents() {
         return;
     }
 
-    if (nextEvents.length < 10) {
+    if (nextEvents.length < 5) {
         var max = nextEvents.length;
     } else {
-        var max = 10;
+        var max = 5;
     }
 
     var printOut = "";
@@ -88,13 +92,14 @@ function getNextEvents() {
             var stringEvents = stringifyEvent(list.daysRepeated);
             var stringException = stringifyExceptDate(list.exceptionDates);
 
-             printOut += "<div id='futureEvents'>" + list.name + " , " +
+             printOut += "<div id="+list.name +">" + list.name + " , " +
             stringEvents+  " , "+ stringException + " , " + list.startTime + " , "
-            + list.endTime+"<br></div>";
+            + list.endTime+" , "+list.listName+"<br></div>";
         } else {
-            printOut += "<div id='futureEvents'>" + list.name + " , " +
+
+            printOut += "<div id="+list.name +">" + list.name + " , " +
             list.date + " , " + list.startTime + " , "
-            + list.endTime+"<br></div>";
+            + list.endTime+" , "+list.listName+"<br></div>";
         }
     }
     document.getElementById("futureEvents").innerHTML = printOut;

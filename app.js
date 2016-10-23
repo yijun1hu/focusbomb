@@ -60,6 +60,10 @@ function getAllEvents() {
     var d = new Date();
     var currYear = d.getYear();
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
+    if (currstorage === null) {
+        alert("Failed to get events - there are no events in the system. Please consider adding an event.");
+        return;
+    }
     var toSort = [];
     var i = 0; //event counter
     var nextevent;
@@ -219,12 +223,18 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (endTime < startTime) {
         alert("Failed to create new event - end time occurs before start time.");
+        return;
     }
-    var i = 0;
-    for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
-        if (currstorage.events[i].name === name) {
-            alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
+    if (currstorage !== null) {
+        var i = 0;
+        for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
+            if (currstorage.events[i].name === name) {
+                alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
+                return;
+            }
         }
+    } else {
+        currstorage = {events: []};
     }
     var newevent = {
         "name": name,
@@ -246,6 +256,10 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
  */
 function readExistingEvent(name) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
+    if (currstorage === null) {
+        alert("Failed to read event - there are no events in the system. Please consider adding an event.");
+        return;
+    }
     var i = 0;
     for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific event
         if (currstorage.events[i].name === name) {
@@ -260,6 +274,10 @@ function readExistingEvent(name) {
  */
 function updateExistingEvent(name, repeat, daysRepeated, exceptionDates, date, startTime, endTime, listName) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
+    if (currstorage === null) {
+        alert("Failed to update events- there are no events in the system. Please consider adding an event.");
+        return;
+    }
     var targeteventindex = -1;
     var i = 0;
     for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
@@ -270,6 +288,7 @@ function updateExistingEvent(name, repeat, daysRepeated, exceptionDates, date, s
     }
     if (targeteventindex === -1) {
         alert("Failed to update event - the provided name does not match any existing events.");
+        return;
     } else {
         var newevent = {
             "name": name,
@@ -291,6 +310,10 @@ function updateExistingEvent(name, repeat, daysRepeated, exceptionDates, date, s
  */
 function deleteExistingEvent(name) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
+    if (currstorage === null) {
+        alert("Failed to delete event - there are no events in the system. Please consider adding an event.");
+        return;
+    }
     var found = false;
     var i = 0;
     for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
@@ -301,6 +324,7 @@ function deleteExistingEvent(name) {
     }
     if (!found) {
         alert("Failed to delete event - the provided name does not match any existing events.");
+        return;
     } else {
         setLocalStorage("events", JSON.stringify(currstorage));
     }
@@ -311,11 +335,15 @@ function deleteExistingEvent(name) {
  */
 function createNewList(name, type, color, sites) {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
-    var i = 0;
-    for (i = 0; i < currstorage.lists.length(); i += 1) { //ensure that a list with the same name DNE
-        if (currstorage.lists[i].name === name) {
-            alert("Failed to create new list - the provided name belongs to a list that already exists. Please choose a different name.");
+    if (currstorage !== null) {
+        var i = 0;
+        for (i = 0; i < currstorage.lists.length(); i += 1) { //ensure that a list with the same name DNE
+            if (currstorage.lists[i].name === name) {
+                alert("Failed to create new list - the provided name belongs to a list that already exists. Please choose a different name.");
+            }
         }
+    } else {
+        currstorage = {lists: []};
     }
     var newlist = {
         "name": name,
@@ -333,6 +361,10 @@ function createNewList(name, type, color, sites) {
  */
 function readExistingList(name) {
     var currstorage = JSON.parse(loadLocalStorage("lists"));
+    if (currstorage === null) {
+        alert("Failed to read list - there are no lists in the system. Please consider adding an list.");
+        return;
+    }
     var i = 0;
     for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
         if (currstorage.lists[i].name === name) {
@@ -347,6 +379,10 @@ function readExistingList(name) {
  */
 function updateExistingList(name, type, color, sites) {
     var currstorage = JSON.parse(loadLocalStorage("lists"));
+    if (currstorage === null) {
+        alert("Failed to update list - there are no lists in the system. Please consider adding an list.");
+        return;
+    }
     var targetlistindex = -1;
     var i = 0;
     for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
@@ -357,6 +393,7 @@ function updateExistingList(name, type, color, sites) {
     }
     if (targetlistindex === -1) {
         alert("Failed to update list - the provided name does not match any existing lists.");
+        return;
     } else {
         var newlist = {
             "name": name,
@@ -374,6 +411,10 @@ function updateExistingList(name, type, color, sites) {
  */
 function deleteExistingList(name) {
     var currstorage = JSON.parse(loadLocalStorage("lists"));
+    if (currstorage === null) {
+        alert("Failed to delete list - there are no lists in the system. Please consider adding an list.");
+        return;
+    }
     var found = false;
     var i = 0;
     for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
@@ -384,6 +425,7 @@ function deleteExistingList(name) {
     }
     if (!found) {
         alert("Failed to delete list - the provided name does not match any existing lists.");
+        return;
     } else {
         setLocalStorage("lists", JSON.stringify(currstorage));
     }

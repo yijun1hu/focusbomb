@@ -20,13 +20,16 @@ function blockPage(id, url) {
  * Determine whether or not the given page is blocked (i.e. in an ongoing blacklist, not in an ongoing whitelist)
  */
 function determineIsBlocked(url) {
-    var events = getAllEvents();
+    var events = getAllEvents(); //array of NAMES
+    if (events === null || events === undefined || events.length === 0) {
+        return false;
+    }
     var i;
     var list;
     for (i = 0; i < events.length; i += 1) { //see all filters to see if there is a violation
-        list = readExistingList(events[i].listName); //gets the list object for the filter
-        if ((list.type === "b" && list.sites.contains(url)) || (list.type === "w" && !list.sites.contains(url))) {
-            return determineIsEventOngoing(events[i]); //checks the time slot for violations
+        list = readExistingList(readExistingEvent(events[i]).listName); //gets the list object for the filter
+        if (list !== null && ((list.type === "b" && containsExtended(list.sites, url)) || (list.type === "w" && !containsExtended(list.sites, url)))) {
+            return determineIsEventOngoing(readExistingEvent(events[i])); //checks the time slot for violations
         }
     }
     return false;
@@ -46,10 +49,10 @@ function determineIsEventOngoing(nextevent) {
         dateSTART = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.startTime;
         dateEND = "" + d.getYear() + " " + zerofillTwoDigits(eventmonthdate[0]) + "" + zerofillTwoDigits(eventmonthdate[1]) + nextevent.endTime;
     } else {
-        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.beginTime.substring(0, 2)), parseInt(nextevent.beginTime.substring(2, 4)), 0, 0);
-        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)), parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
+        dateSTART = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.startTime.substring(0, 2)), parseInt(nextevent.startTime.substring(2, 4)), 0, 0);
+        dateEND = new Date(parseInt(nextevent.date.substring(0, 4)), parseInt(nextevent.date.substring(5, 7)), parseInt(nextevent.date.substring(8, 10)) - 1, parseInt(nextevent.endTime.substring(0, 2)), parseInt(nextevent.endTime.substring(2, 4)), 0, 0);
     }
-    return dateSTART < d && d < dateEND;
+    return dateSTART <= d && d < dateEND;
 }
 
 /**
@@ -62,7 +65,7 @@ function getAllEvents() {
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (currstorage === null) {
         console.log("Failed to get events - there are no events in the system. Please consider adding an event.");
-        return;
+        return [];
     }
     var toSort = [];
     var i = 0; //event counter
@@ -123,7 +126,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
     var currtime = "" + currHour.toString() + currMinutes.toString();
     //First, find the difference between the current day of the week and the next scheduled repeat event
     var eventdays = nextevent.daysRepeated;
-    var ddate = 0; //number of days difference between today and the next occurance of the event
+    var ddate = 7; //number of days difference between today and the next occurance of the event
     var matchingindex = -1; //in the case that the event takes place on the current day, this will match the index. I.E. Today is Wednesday, daysrepeated is MTWS, matchingindex = 2 for W.
     var j;
     var unit; //the specific day of the week identifier currently chosen
@@ -131,43 +134,42 @@ function getRepeatingEventMonthDate(d, nextevent) {
         unit = eventdays.charAt(j); // get the value and test
         //test: if the event occurs on a given day, ensure that the edge case where the event has already passed is caught
         if (unit === "M") {
-            ddate = Math.min(ddate, (0 - currDay) % 7);
-            if ((0 - currDay) % 7 === 0) {
-                matchingindex = j;
-            }
-        } else if (unit === "T") {
             ddate = Math.min(ddate, (1 - currDay) % 7);
             if ((1 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
-        } else if (unit === "W") {
+        } else if (unit === "T") {
             ddate = Math.min(ddate, (2 - currDay) % 7);
             if ((2 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
-        } else if (unit === "R") {
+        } else if (unit === "W") {
             ddate = Math.min(ddate, (3 - currDay) % 7);
             if ((3 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
-        } else if (unit === "F") {
+        } else if (unit === "R") {
             ddate = Math.min(ddate, (4 - currDay) % 7);
             if ((4 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
-        } else if (unit === "S") {
+        } else if (unit === "F") {
             ddate = Math.min(ddate, (5 - currDay) % 7);
             if ((5 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
-        } else if (unit === "N") {
+        } else if (unit === "S") {
             ddate = Math.min(ddate, (6 - currDay) % 7);
             if ((6 - currDay) % 7 === 0) {
                 matchingindex = j;
             }
+        } else if (unit === "N") {
+            ddate = Math.min(ddate, (0 - currDay) % 7);
+            if ((0 - currDay) % 7 === 0) {
+                matchingindex = j;
+            }
         }
     }
-
     var nextoccurance; //the character for the day of the week of the next occurance of the event
     var nextoccurancenum; //the day ID of the next occurance of the event after the current day
 
@@ -192,7 +194,6 @@ function getRepeatingEventMonthDate(d, nextevent) {
         }
         ddate = (nextoccurancenum - currDay) % 7;
     }
-
     //Then, adjust months and days (dates) based off of leap years and month transitions.
     var eventmonth = currMonth;
     var eventdate = currDate;
@@ -210,7 +211,6 @@ function getRepeatingEventMonthDate(d, nextevent) {
         eventmonth += 1;
         eventdate = (eventdate + ddate) % 28;
     }
-
     return [eventmonth, eventdate];
 }
 
@@ -222,7 +222,7 @@ function getAllLists() {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
     if (currstorage === null) {
         console.log("Failed to get lists - there are no lists in the system. Please consider adding an lists.");
-        return;
+        return [];
     }
     var i = 0; //list counter
     var toreturn = [];
@@ -241,14 +241,14 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
     var currstorage = JSON.parse(loadLocalStorage("events")); //obtain all currently stored events
     if (endTime < startTime) {
         alert("Failed to create new event - end time occurs before start time.");
-        return;
+        return null;
     }
     if (currstorage !== null) {
         var i = 0;
         for (i = 0; i < currstorage.events.length; i += 1) { //ensure that a event with the same name DNE
             if (currstorage.events[i].name === name) {
                 alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
-                return;
+                return null;
             }
         }
     } else {
@@ -276,7 +276,7 @@ function readExistingEvent(name) {
     var currstorage = JSON.parse(loadLocalStorage("events"));
     if (currstorage === null) {
         alert("Failed to read event - there are no events in the system. Please consider adding an event.");
-        return;
+        return null;
     }
     var i = 0;
     for (i = 0; i < currstorage.events.length; i += 1) { //find the specific event
@@ -391,6 +391,7 @@ function readExistingList(name) {
         }
     }
     alert("Failed to read list - the provided name does not match any existing lists.");
+    return null;
 }
 
 /**
@@ -486,6 +487,20 @@ function contains(a, obj) {
     var i = a.length;
     while (i--) {
         if (a[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Tests if array contains the object... or if a member of a contains obj as a substring/ obj contains a member of a as a substring.
+ * Only works for strings.
+ */
+function containsExtended(a, str) {
+    var i = a.length;
+    while (i--) {
+        if (a[i] === str || a[i].includes(str) || str.includes(a[i])) {
             return true;
         }
     }

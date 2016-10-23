@@ -4,13 +4,15 @@
   "description": "Use a calender and increase your productiveness, by kicking you out of certain websites!",
   "version": "1.0.0",
   "background": {
-    "page": "background.html"
+    "persistent": true,
+    "scripts": ["app.js", "background.js"]
   },
   "browser_action": {
     "default_popup": "index.html"
   },
   "permissions": [
-    "activeTab"
+    "tabs",
+    "*://*/*"
   ],
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://maxcdn.bootstrapcdn.com; object-src 'self'"
 }

@@ -28,7 +28,7 @@ function MEvent() {
     } else {
         var ename = document.getElementById("eventName").value;
         var inputDate = document.getElementById("inputDate").value;
-        inputDate.replace("-", " "); //convert the output into the required format
+        var fixedDate = inputDate.replace("-", " "); //convert the output into the required format
         var sTime = document.getElementById("startTime").value;
         var startTime = convertTime(sTime);
 
@@ -38,7 +38,6 @@ function MEvent() {
         var dates = [document.getElementById("dayM").checked, document.getElementById("dayT").checked, document.getElementById("dayW").checked,
             document.getElementById("dayR").checked, document.getElementById("dayF").checked, document.getElementById("dayS").checked,
             document.getElementById("dayN").checked];
-        alert(listChoice.selectedIndex);
         var listName = listChoice.options[listChoice.selectedIndex].value;
         var datestring = "";
         var i = 0;
@@ -61,7 +60,7 @@ function MEvent() {
                 }
             }
         }
-        createNewEvent(ename, repeat, datestring, [], inputDate, startTime, endTime, listName);
+        createNewEvent(ename, repeat, datestring, [], fixedDate, startTime, endTime, listName);
     }
 }
 
@@ -228,9 +227,9 @@ function previouslyUsedList() {
 
 function convertTime (inputTime) {
     var timeSplit = inputTime.split(':');
-    var hours = timeSplit[0];
-    var minutes = timeSplit[1];
-    var strTime = (hours +""+minutes);
+    var hours = zerofillTwoDigits("" + timeSplit[0]);
+    var minutes = zerofillTwoDigits("" + timeSplit[1]);
+    var strTime = ("" + hours + minutes);
     return strTime;
 }
 
@@ -242,17 +241,17 @@ function covertBackTime (strTime) {
     hours = strTime[0] + "" + strTime[1];
     minutes = strTime[2] + "" + strTime[3];
 
-  if (hours > 12) {
-    meridian = 'PM';
-    hours -= 12;
-  } else if (hours < 12) {
-    meridian = 'AM';
-    if (hours == 0) {
-      hours = 12;
+    if (hours > 12) {
+        meridian = 'PM';
+        hours -= 12;
+    } else if (hours < 12) {
+        meridian = 'AM';
+        if (hours == 0) {
+            hours = 12;
+        }
+    } else {
+        meridian = 'PM';
     }
-  } else {
-    meridian = 'PM';
-  }
-  var readTime = hours + ':' + minutes + ' ' + meridian;
-  return readTime;
+    var readTime = hours + ':' + minutes + ' ' + meridian;
+    return readTime;
 }

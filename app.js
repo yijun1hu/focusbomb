@@ -72,7 +72,7 @@ function getAllEvents() {
     var s; //insertion sort counter
     var t; //insertion sort counter
     var temp; //insertion sort temp variable
-    for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
+    for (i = 0; i < currstorage.events.length; i += 1) { //ensure that a event with the same name DNE
         //for sorting purposes, repeated events use next non-exception dates
         nextevent = currstorage.events[i];
         if (nextevent.repeat) {
@@ -91,7 +91,7 @@ function getAllEvents() {
         }
 
         //now do the sort. Insertion Sort.
-        for (s = 1; s < toSort.length(); s += 1) {
+        for (s = 1; s < toSort.length; s += 1) {
             temp = toSort[s];
             t = s - 1;
             while (t >= 0 && toSort[t].date > temp.date) {
@@ -103,7 +103,7 @@ function getAllEvents() {
     }
 
     var toreturn = [];
-    for (i = 0; i < toSort.length(); i += 1) {
+    for (i = 0; i < toSort.length; i += 1) {
         toreturn.push(toSort[i].name);
     }
     return toreturn;
@@ -127,7 +127,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
     var matchingindex = -1; //in the case that the event takes place on the current day, this will match the index. I.E. Today is Wednesday, daysrepeated is MTWS, matchingindex = 2 for W.
     var j;
     var unit; //the specific day of the week identifier currently chosen
-    for (j = 0; j < eventdays.length(); j += 1) { //for every day it repeats
+    for (j = 0; j < eventdays.length; j += 1) { //for every day it repeats
         unit = eventdays.charAt(j); // get the value and test
         //test: if the event occurs on a given day, ensure that the edge case where the event has already passed is caught
         if (unit === "M") {
@@ -173,7 +173,7 @@ function getRepeatingEventMonthDate(d, nextevent) {
 
     //edge case where event is currently happening or happened earlier today
     if (currtime > nextevent.startTime && matchingindex > -1) {
-        nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length());
+        nextoccurance = eventdays.charAt((matchingindex + 1) % eventdays.length;
         nextoccurancenum = 0;
         if (nextoccurance === "M") {
             nextoccurancenum = 0;
@@ -227,7 +227,7 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
     }
     if (currstorage !== null) {
         var i = 0;
-        for (i = 0; i < currstorage.events.length(); i += 1) { //ensure that a event with the same name DNE
+        for (i = 0; i < currstorage.events.length; i += 1) { //ensure that a event with the same name DNE
             if (currstorage.events[i].name === name) {
                 alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
                 return;
@@ -261,7 +261,7 @@ function readExistingEvent(name) {
         return;
     }
     var i = 0;
-    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific event
+    for (i = 0; i < currstorage.events.length; i += 1) { //find the specific event
         if (currstorage.events[i].name === name) {
             return currstorage.events[i];
         }
@@ -280,7 +280,7 @@ function updateExistingEvent(name, repeat, daysRepeated, exceptionDates, date, s
     }
     var targeteventindex = -1;
     var i = 0;
-    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
+    for (i = 0; i < currstorage.events.length; i += 1) { //find the specific list
         if (currstorage.events[i].name === name) {
             targeteventindex = i;
             break;
@@ -316,7 +316,7 @@ function deleteExistingEvent(name) {
     }
     var found = false;
     var i = 0;
-    for (i = 0; i < currstorage.events.length(); i += 1) { //find the specific list
+    for (i = 0; i < currstorage.events.length; i += 1) { //find the specific list
         if (currstorage.events[i].name === name) {
             currstorage.events = array.splice(i, 1); //remove the specific list
             found = true;
@@ -337,7 +337,7 @@ function createNewList(name, type, color, sites) {
     var currstorage = JSON.parse(loadLocalStorage("lists")); //obtain all currently stored lists
     if (currstorage !== null) {
         var i = 0;
-        for (i = 0; i < currstorage.lists.length(); i += 1) { //ensure that a list with the same name DNE
+        for (i = 0; i < currstorage.lists.length; i += 1) { //ensure that a list with the same name DNE
             if (currstorage.lists[i].name === name) {
                 alert("Failed to create new list - the provided name belongs to a list that already exists. Please choose a different name.");
             }
@@ -366,7 +366,7 @@ function readExistingList(name) {
         return;
     }
     var i = 0;
-    for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
+    for (i = 0; i < currstorage.lists.length; i += 1) { //find the specific list
         if (currstorage.lists[i].name === name) {
             return currstorage.lists[i];
         }
@@ -385,7 +385,7 @@ function updateExistingList(name, type, color, sites) {
     }
     var targetlistindex = -1;
     var i = 0;
-    for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
+    for (i = 0; i < currstorage.lists.length; i += 1) { //find the specific list
         if (currstorage.lists[i].name === name) {
             targetlistindex = i;
             break;
@@ -417,7 +417,7 @@ function deleteExistingList(name) {
     }
     var found = false;
     var i = 0;
-    for (i = 0; i < currstorage.lists.length(); i += 1) { //find the specific list
+    for (i = 0; i < currstorage.lists.length; i += 1) { //find the specific list
         if (currstorage.lists[i].name === name) {
             currstorage.lists = array.splice(i, 1); //remove the specific list
             found = true;

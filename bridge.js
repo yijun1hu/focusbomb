@@ -84,3 +84,24 @@ function getNextEvents() {
     document.getElementById("upcoming").innerHTML = printOut;
 }
 
+/**
+ * Creates a new list white or black for future events.
+ */
+function MList() {
+    var lname = document.getElementById("listName").value;
+    document.getElementById("upcoming").innerHTML = lname;
+
+    var ccolor = "#cccccc";
+    var ttype;
+    if (document.getElementById("whitelist").checked) {
+        ttype = "w";
+    } else {
+        ttype = "b";
+    }
+    var ssites = document.getElementById("listWebsites").value;
+    ssites = ssites.replace(/\n/g, " ");
+    ssites = ssites.replace(/,/g, " ");
+    var dividesites = ssites.split(" ");
+    createNewList(lname, ttype, ccolor, dividesites);
+    var ttest = readExistingList(lname);
+}

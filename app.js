@@ -246,7 +246,7 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
         "endTime": endTime,
         "listName": listName
     };
-    currstorage.lists.push(newevent);
+    currstorage.events.push(newevent);
     setLocalStorage("events", JSON.stringify(currstorage));
 }
 

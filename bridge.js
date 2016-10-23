@@ -93,7 +93,7 @@ function getNextEvents() {
         list = readExistingList(i)
         var s = next.name + "," + readExistingList.date+"," + nex+"\n";
     }*/
-    document.getElementById("testJennifer").innerHTML = printOut;
+    document.getElementById("futureEvents").innerHTML = printOut;
 }
 
 /**
@@ -175,7 +175,8 @@ function previouslyUsedList() {
     var list;
     var printLists= "";
     for (var i = 0; i < allList.length; i+=1) {
-        list = readExistingList();
+        list = readExistingList(allList[i]);
         printLists += "<li role='presentation'><a role='menuitem' tabindex='-1' id="+ list.name +">" + list.name+"</a></li>";
     }
+    document.getElementById("testJennifer").innerHTML = printLists;
 }

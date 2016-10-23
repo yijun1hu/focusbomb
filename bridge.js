@@ -8,10 +8,10 @@
  */
 function CreateDummyEvents() {
     alert("Create dummy variables");
-    createNewList("Angel", "b", "#8000F", ["twitter.com", "reddit.com"]);
-    createNewList("Blue", "b", "#8000F", ["twitter.com", "reddit.com"]);
-    createNewList("Seven", "b", "#8000F", ["twitter.com", "reddit.com"]);
-    createNewList("Dark", "b", "#8000F", ["twitter.com", "reddit.com"]);
+    createNewList("Angel", "b", "#8000FF", ["twitter.com", "reddit.com"]);
+    createNewList("Blue", "b", "#8000FF", ["twitter.com", "reddit.com"]);
+    createNewList("Seven", "b", "#8000FF", ["twitter.com", "reddit.com"]);
+    createNewList("Dark", "b", "#8000FF", ["twitter.com", "reddit.com"]);
     createNewEvent("ahhhhh", true, "MWF", ["2016 12 24", "2016 12 25"], null, 1400, 1600, "Angel");
     createNewEvent("man", false, null, null, "2016 10 31", 400, 600, "Blue");
     createNewEvent("two", false, null, null, "2016 10 22", 1600, 2200, "Seven");

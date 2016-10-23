@@ -12,7 +12,7 @@ function CreateDummyEvents() {
     createNewList("Blue", "b", "#8000F", ["twitter.com", "reddit.com"]);
     createNewList("Seven", "b", "#8000F", ["twitter.com", "reddit.com"]);
     createNewList("Dark", "b", "#8000F", ["twitter.com", "reddit.com"]);
-    createNewEvent("name", true, "MWF", ["2016 12 24"], null, 1400, 1600, "Angel");
+    createNewEvent("ahhhhh", true, "MWF", ["2016 12 24", "2016 12 25"], null, 1400, 1600, "Angel");
     createNewEvent("man", false, null, null, "2016 10 31", 400, 600, "Blue");
     createNewEvent("two", false, null, null, "2016 10 22", 1600, 2200, "Seven");
 
@@ -64,8 +64,6 @@ function MEvent() {
  * @return array of all next 20 events, sorted by date
  */
 function getNextEvents() {
-
-    /*CreateDummyEvents();*/
     var nextEvents = getAllEvents();
     var printOut = "";
     var list;
@@ -73,10 +71,10 @@ function getNextEvents() {
         list = readExistingEvent(nextEvents[i]);
         if (list.repeat) {
             var stringEvents = stringifyEvent(list.daysRepeated);
-
+            var stringException = stringifyExceptDate(list.exceptionDates);
 
              printOut += "<div id='futureEvents'>" + list.name + " , " +
-            stringEvents+  " , "+ list.exceptionDates + " , " + list.startTime + " , "
+            stringEvents+  " , "+ stringException + " , " + list.startTime + " , "
             + list.endTime+"<br></div>";
         } else {
             printOut += "<div id='futureEvents'>" + list.name + " , " +
@@ -142,4 +140,16 @@ function stringifyEvent(weekEvent) {
         }
     }
     return printWeekEvent;
+}
+
+function stringifyExceptDate(exceptionDates) {
+    var printExceptDate = "[ ";
+    for (var i = 0; i < exceptionDates.length; i+=1) {
+        printExceptDate += (exceptionDates[i]);
+        if (i != exceptionDates.length - 1) {
+            printExceptDate += " , ";
+        }
+    }
+     printExceptDate += " ]";
+    return printExceptDate;
 }

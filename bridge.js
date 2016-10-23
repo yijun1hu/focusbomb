@@ -168,3 +168,14 @@ function stringifyList(inputList) {
     }
     return printList;
 }
+
+
+function previouslyUsedList() {
+    var allList = getAllLists();
+    var list;
+    var printLists= "";
+    for (var i = 0; i < allList.length; i+=1) {
+        list = readExistingList();
+        printLists += "<li role='presentation'><a role='menuitem' tabindex='-1' id="+ list.name +">" + list.name+"</a></li>";
+    }
+}

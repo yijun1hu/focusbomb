@@ -246,7 +246,7 @@ function createNewEvent(name, repeat, daysRepeated, exceptionDates, date, startT
     if (currstorage !== null) {
         var i = 0;
         for (i = 0; i < currstorage.events.length; i += 1) { //ensure that a event with the same name DNE
-            if (currstorage.events[i].name == name) {
+            if (currstorage.events[i].name === name) {
                 alert("Failed to create new event - the provided name belongs to a event that already exists. Please choose a different name.");
                 return;
             }
@@ -356,7 +356,7 @@ function createNewList(name, type, color, sites) {
     if (currstorage !== null) {
         var i = 0;
         for (i = 0; i < currstorage.lists.length; i += 1) { //ensure that a list with the same name DNE
-            if (currstorage.lists[i].name == name) {
+            if (currstorage.lists[i].name === name) {
                 alert("Failed to create new list - the provided name belongs to a list that already exists. Please choose a different name.");
                 return;
             }
@@ -485,9 +485,9 @@ function zerofillTwoDigits(input) {
 function contains(a, obj) {
     var i = a.length;
     while (i--) {
-       if (a[i] === obj) {
-           return true;
-       }
+        if (a[i] === obj) {
+            return true;
+        }
     }
     return false;
 }
